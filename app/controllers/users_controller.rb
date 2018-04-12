@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   def create
   #binding.pry
     if  params[:user][:password] == params[:user][:password_confirmation]
-      user = User.create(user_params)
-      session[:user_id] = user.id
+      @user = User.create(user_params)
+      session[:user_id] = @user.id
       redirect_to '/welcome'
     else
       redirect_to '/signup'
