@@ -1,3 +1,4 @@
+require 'pry'
 class UsersController < ApplicationController
   def welcome
   end
@@ -7,11 +8,11 @@ class UsersController < ApplicationController
   end
 
   def create
-  #binding.pry
+  binding.pry
     if  params[:user][:password] == params[:user][:password_confirmation]
       @user = User.create(user_params)
       session[:user_id] = @user.id
-      redirect_to '/welcome'
+      redirect_to '/users/welcome'
     else
       redirect_to '/signup'
     end
@@ -21,6 +22,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
