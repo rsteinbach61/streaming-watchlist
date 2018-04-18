@@ -12,9 +12,13 @@
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <a class="navbar-brand" href="<%= root_path %>"/>Home</a>
         <div class=navlinks>
-         <%= link_to "Sign Up", users_signup_path %>
-         <%= link_to "Sign In", sessions_sign_in_path %>
-         <%= link_to "Log Out", sessions_destroy_path %>
+          <% if logged_in? %>
+            <p><%= link_to "Log Out", sessions_destroy_path %></p>
+            <p><%= link_to current_user.name, users_show_path %></p>
+          <% else %>
+            <p><%= link_to "Sign Up", users_signup_path %></p>
+            <p><%= link_to "Sign In", sessions_sign_in_path %></p>
+          <% end %>
         </div>
     </div>
 
