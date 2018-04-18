@@ -1,4 +1,4 @@
 class Show < ApplicationRecord
-  has_many :watchlists
-  has_many :users, through: :watchlists 
+  belongs_to :watchlist, optional: true
+  has_many :users, through: :watchlists
 end
