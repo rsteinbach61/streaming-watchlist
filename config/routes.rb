@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'watchlists/new'
+
+  get 'watchlists/edit'
+
+  get 'watchlists/show'
+
+  post 'watchlists/new' => 'watchlists#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'users#welcome'
   get 'users/show' => 'users#show'
