@@ -11,6 +11,8 @@ class WatchlistsController < ApplicationController
   end
 
   def edit
+    #binding.pry
+    @watchlist = Watchlist.find(params[:format])
   end
 
   def show
