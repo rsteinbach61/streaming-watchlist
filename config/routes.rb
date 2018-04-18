@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  #get 'watchlists/new'
-  #patch 'watchlists/new' => 'watchlists#update'
-  #get 'watchlists/:id/edit' => 'watchlist#edit'
+  get 'shows/new'
 
-  #get 'watchlists/show'
+  get 'shows/edit'
 
-  #post 'watchlists/new' => 'watchlists#create'
-  resources :watchlists 
+  get 'shows/show'
+
+  get 'shows/destroy'
+
+  resources :shows
+  resources :watchlists
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'users#welcome'
   get 'users/show' => 'users#show'
