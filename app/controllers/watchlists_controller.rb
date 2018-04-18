@@ -23,6 +23,11 @@ class WatchlistsController < ApplicationController
   def show
   end
 
+  def index
+    binding.pry
+    @watchlists = Watchlist.all
+  end
+
   private
 
   def watchlist_params
