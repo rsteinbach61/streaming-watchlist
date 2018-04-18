@@ -9,6 +9,15 @@
   </head>
 
   <body>
+    <div class="navbar navbar-fixed-top" role="navigation">
+      <a class="navbar-brand" href="<%= root_path %>"/>Home</a>
+        <div class="d-flex align-items-center">
+          <a> <%= link_to "Sign Up", users_signup_path %></a>
+          <a> <%= link_to "Sign In", sessions_sign_in_path %></a>
+          <a> <%= link_to "Log Out", sessions_destroy_path %></a>
+        </div>
+    </div>
+
     <%= yield %>
   </body>
 </html>
