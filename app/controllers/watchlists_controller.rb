@@ -17,6 +17,7 @@ class WatchlistsController < ApplicationController
   def update
     @watchlist = Watchlist.find(params[:id])
     @watchlist.update(watchlist_params)
+    redirect_to root_path
   end
 
   def show
