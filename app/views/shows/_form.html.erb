@@ -2,5 +2,7 @@
 <%= form_for @show do |f| %>
 <%= f.label :show_title %>
 <%= f.text_field :show_title %>
+<%= f.label 'Choose a Watchlist' %>
+<%= f.collection_select :watchlist_id, Watchlist.all, :id, :title %>
 <%= f.submit %>
 <% end %>
