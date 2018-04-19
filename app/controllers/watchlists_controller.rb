@@ -17,10 +17,10 @@ class WatchlistsController < ApplicationController
   def update
     @watchlist = Watchlist.find(params[:id])
     @watchlist.update(watchlist_params)
-        binding.pry
   end
 
   def show
+    @watchlist = Watchlist.find_by(:id => params[:id])
   end
 
   def index
