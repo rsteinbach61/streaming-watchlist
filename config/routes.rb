@@ -1,12 +1,5 @@
 Rails.application.routes.draw do
-  get 'shows/new'
-
-  get 'shows/edit'
-
-  get 'shows/show'
-
-  get 'shows/destroy'
-
+  
   resources :shows
   resources :watchlists
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

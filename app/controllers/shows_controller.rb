@@ -16,6 +16,7 @@ class ShowsController < ApplicationController
   def update
     @show = Show.find_by(params[:id])
     @show.update(show_params)
+    redirect_to show_path(@show)
   end
 
   def show
