@@ -5,7 +5,8 @@ class ShowsController < ApplicationController
   end
 
   def create
-    @show = Show.find_by(params[:id])
+    @show = Show.create(show_params)
+    redirect_to '/users/welcome'
   end
 
   def edit
