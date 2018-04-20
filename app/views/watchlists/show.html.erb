@@ -1,7 +1,7 @@
 
 
 <h3><%= link_to @watchlist.title, edit_watchlist_path(@watchlist) %></h3>
-
+<%= button_to "delete", @watchlist, :method => :delete %>
 <ul>
   <% @watchlist.shows.each do |s| %>
     <li><%= link_to s.show_title, show_path(s) %></li>

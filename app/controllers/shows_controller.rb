@@ -24,6 +24,8 @@ class ShowsController < ApplicationController
   end
 
   def destroy
+  @show = Show.find_by(params[:id])
+  @show.delete
   end
 
   private
