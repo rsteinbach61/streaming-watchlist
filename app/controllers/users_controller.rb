@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
   end
-  
+
   def new
     @user = User.new
   end
@@ -14,11 +14,13 @@ class UsersController < ApplicationController
   #binding.pry
     if  params[:user][:password] == params[:user][:password_confirmation]
       @user = User.create(user_params)
-      session[:user_id] = @user.id
-      redirect_to '/users/welcome'
-    else
-      redirect_to '/users/signup'
     end
+      if @user.save
+        session[:user_id] = @user.id
+        redirect_to '/users/welcome'
+      else
+        render '/users/new'
+      end
   end
 
 
