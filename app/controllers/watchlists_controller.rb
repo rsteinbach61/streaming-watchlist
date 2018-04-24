@@ -11,7 +11,11 @@ class WatchlistsController < ApplicationController
   end
 
   def edit
-    @watchlist = Watchlist.find(params[:id])
+    if edit_permitted?
+      @watchlist = Watchlist.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def update
@@ -30,7 +34,7 @@ class WatchlistsController < ApplicationController
   end
 
   def destroy
-  @watchlist = Watchlist.find_by(params[:id])
+  @watchlist = Watchlist.find_by(:id => params[:id])
   @watchlist.delete
   end
 
