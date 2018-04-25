@@ -24,6 +24,7 @@ class ShowsController < ApplicationController
   end
 
   def show
+    binding.pry
     @show = Show.find_by(:id => params[:id])
   end
 

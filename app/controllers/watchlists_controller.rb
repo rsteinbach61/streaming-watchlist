@@ -1,4 +1,5 @@
 class WatchlistsController < ApplicationController
+  before_action :set_watchlist, only: [:show, :edit, :update, :destroy]
   def new
     @watchlist = Watchlist.new
     @user = current_user
@@ -19,13 +20,12 @@ class WatchlistsController < ApplicationController
   end
 
   def update
-    @watchlist = Watchlist.find(params[:id])
     @watchlist.update(watchlist_params)
-    redirect_to root_path
+    redirect_to root_path, notice: 'Watchlist successfully updated.'
   end
 
   def show
-    @watchlist = Watchlist.find_by(:id => params[:id])
+
   end
 
   def index
@@ -34,11 +34,16 @@ class WatchlistsController < ApplicationController
   end
 
   def destroy
-  @watchlist = Watchlist.find_by(:id => params[:id])
-  @watchlist.delete
+
+    @watchlist.destroy
+    redirect_to root_path, notice: 'Watch list deleted.'
   end
 
   private
+
+  def set_watchlist
+    @watchlist = Watchlist.find_by(:id => params[:id])
+  end
 
   def watchlist_params
     params.require(:watchlist).permit(:title, :user_id)
