@@ -1,4 +1,5 @@
 class ShowsController < ApplicationController
+  before_action :set_show, only: [:show, :edit, :update, :destroy]
   def new
     @show = Show.new
     @user = current_user
@@ -18,22 +19,26 @@ class ShowsController < ApplicationController
   end
 
   def update
-    @show = Show.find_by(:id => params[:id])
+
     @show.update(show_params)
     redirect_to show_path(@show)
   end
 
   def show
-    binding.pry
-    @show = Show.find_by(:id => params[:id])
+
   end
 
   def destroy
-  @show = Show.find_by(:id => params[:id])
-  @show.delete
+
+  @show.destroy
+
   end
 
   private
+  def set_show
+    @show = Show.find_by(:id => params[:id])
+  end
+
   def show_params
     params.require(:show).permit(:show_title, :watchlist_id)
   end
