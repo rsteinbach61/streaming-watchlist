@@ -21,17 +21,15 @@ class ShowsController < ApplicationController
   def update
 
     @show.update(show_params)
-    redirect_to show_path(@show)
+    redirect_to show_path(@show), notice: 'Show updated.'
   end
 
   def show
-
   end
 
   def destroy
-
-  @show.destroy
-
+    @show.destroy
+    redirect_to root_path, notice: 'Show deleted.'
   end
 
   private

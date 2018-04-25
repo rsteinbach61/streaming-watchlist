@@ -34,7 +34,6 @@ class WatchlistsController < ApplicationController
   end
 
   def destroy
-
     @watchlist.destroy
     redirect_to root_path, notice: 'Watch list deleted.'
   end
