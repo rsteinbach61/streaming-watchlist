@@ -7,7 +7,7 @@ class ShowsController < ApplicationController
 
   def create
     @show = Show.create(show_params)
-    redirect_to '/users/welcome'
+    redirect_to '/users/welcome', notice: 'Show created.'
   end
 
   def edit
@@ -25,6 +25,9 @@ class ShowsController < ApplicationController
   end
 
   def show
+    unless edit_permitted?
+      redirect_to root_path, notice: 'Access denied'
+    end
   end
 
   def destroy
