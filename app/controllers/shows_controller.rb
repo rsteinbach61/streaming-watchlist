@@ -17,8 +17,11 @@ class ShowsController < ApplicationController
   end
 
   def update
-    @show.update(show_params)
-    redirect_to show_path(@show), notice: 'Show updated.'
+    if @show.update(show_params)
+      redirect_to show_path(@show), notice: 'Show updated.'
+    else
+      render :edit
+    end
   end
 
   def show
