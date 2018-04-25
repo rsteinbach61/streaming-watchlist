@@ -12,10 +12,8 @@ class WatchlistsController < ApplicationController
   end
 
   def edit
-    if edit_permitted?
-      @watchlist = Watchlist.find(params[:id])
-    else
-      redirect_to root_path
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied.'
     end
   end
 
@@ -25,7 +23,9 @@ class WatchlistsController < ApplicationController
   end
 
   def show
-
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied.'
+    end
   end
 
   def index

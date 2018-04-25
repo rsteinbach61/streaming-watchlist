@@ -11,21 +11,18 @@ class ShowsController < ApplicationController
   end
 
   def edit
-    if edit_permitted?
-      @show = Show.find_by(:id => params[:id])
-    else
-      redirect_to root_path
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
     end
   end
 
   def update
-
     @show.update(show_params)
     redirect_to show_path(@show), notice: 'Show updated.'
   end
 
   def show
-    unless edit_permitted?
+    unless access_permitted?
       redirect_to root_path, notice: 'Access denied'
     end
   end
