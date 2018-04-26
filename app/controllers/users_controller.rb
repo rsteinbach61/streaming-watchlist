@@ -1,5 +1,7 @@
 require 'pry'
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update]
+
   def welcome
   end
 
@@ -11,7 +13,6 @@ class UsersController < ApplicationController
   end
 
   def create
-  #binding.pry
     if  params[:user][:password] == params[:user][:password_confirmation]
       @user = User.create(user_params)
     end
@@ -23,8 +24,30 @@ class UsersController < ApplicationController
       end
   end
 
+  def edit
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
+    end
+  end
+
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: 'User updated.'
+    else
+      render :edit
+    end
+  end
+
+  def show
+  end
+
+
 
   private
+
+  def set_user
+    @user = User.find_by(:id => params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

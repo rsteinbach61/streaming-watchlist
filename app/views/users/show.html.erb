@@ -1,4 +1,5 @@
 <ul>
-  <li><%= current_user.name %></li>
-  <li><%= current_user.email %></li>
+  <li><%= @user.name %> <%= link_to 'edit', edit_user_path(@user) %></li>
+  <li>email: <%= @user.email %></li>
+  <li>ID: <%= @user.id %></li>
 </ul>

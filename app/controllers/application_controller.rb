@@ -21,6 +21,9 @@ class ApplicationController < ActionController::Base
     elsif params[:controller] == 'shows'
       show = Show.find(params[:id])
       current_user.id == show.watchlist.user_id
+    elsif params[:controller] == 'users'
+      user = User.find_by(:id => params[:id])
+      current_user.id == user.id
     end
   end
   helper_method :access_permitted?
