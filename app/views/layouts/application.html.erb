@@ -14,9 +14,9 @@
         <div class=navlinks>
           <% if logged_in? %>
             <p><%= link_to "Log Out", sessions_destroy_path %></p>
-            <p><%= link_to current_user.name, users_show_path %></p>
+            <p><%= link_to current_user.name, user_path(current_user.id) %></p>
           <% else %>
-            <p><%= link_to "Sign Up", users_signup_path %></p>
+            <p><%= link_to "Sign Up", new_user_path %></p>
             <p><%= link_to "Sign In", sessions_sign_in_path %></p>
           <% end %>
         </div>
