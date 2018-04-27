@@ -8,9 +8,7 @@ skip_before_action :require_login, only: [:new, :create]
 
   def create
     @user = User.find_by(name: params[:user][:name])
-    #binding.pry
-    if @user
-      return head(:forbidden) unless @user.authenticate(params[:user][:password])
+    if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
       render '/users/welcome'
     else
