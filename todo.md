@@ -4,7 +4,9 @@ scope method(s)
 
 DONE fix sign up form DONE
 
-add genre and type of show (film or series)
+add genre
+
+DONE add type of show (film or series)
 
 fix dropdown for watchlists when adding show, should only see lists for current user
 
