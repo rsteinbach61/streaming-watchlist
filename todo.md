@@ -4,7 +4,7 @@ scope method(s)
 
 DONE fix sign up form DONE
 
-add genre
+add genre to show
 
 DONE add type of show (film or series)
 

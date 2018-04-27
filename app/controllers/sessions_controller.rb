@@ -19,7 +19,7 @@ skip_before_action :require_login, only: [:new, :create]
 
   def destroy
     session.delete("user_id")
-    redirect_to root_path
+    redirect_to root_path, notice: 'Log out successful.'
   end
 
 end
