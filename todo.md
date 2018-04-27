@@ -1,8 +1,8 @@
-fix error when wrong password entered on sign in ** return head (:forbidden)
+DONE fix error when wrong password entered on sign in ** return head (:forbidden)
 
 scope method(s)
 
-fix sign up form DONE
+DONE fix sign up form DONE
 
 add genre and type of show (film or series)
 
@@ -10,6 +10,10 @@ fix dropdown for watchlists when adding show, should only see lists for current 
 
 use OMDB API to do something cool
 
-add user edit capability DONE
+DONE add user edit capability DONE
 
-add login required to all controllers DONE
+DONE add login required to all controllers DONE
+
+omniauth
+
+remove show_id from watchlists table

@@ -6,8 +6,9 @@ class ShowsController < ApplicationController
   end
 
   def create
+    @user = current_user
     @show = Show.create(show_params)
-    redirect_to '/users/welcome', notice: 'Show created.'
+    redirect_to root_path, notice: 'Show created.'
   end
 
   def edit
@@ -41,6 +42,6 @@ class ShowsController < ApplicationController
   end
 
   def show_params
-    params.require(:show).permit(:show_title, :watchlist_id)
+    params.require(:show).permit(:show_title, :watchlist_id, :show_type)
   end
 end
