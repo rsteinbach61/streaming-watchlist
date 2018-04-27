@@ -42,6 +42,6 @@ class ShowsController < ApplicationController
   end
 
   def show_params
-    params.require(:show).permit(:show_title, :watchlist_id, :show_type)
+    params.require(:show).permit(:show_title, :watchlist_id, :show_type, :genre)
   end
 end
