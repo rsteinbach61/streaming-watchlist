@@ -3,7 +3,7 @@
 <%= f.label :show_title %>
 <%= f.text_field :show_title %><br><br>
 <%= f.label 'Choose a Watchlist' %>
-<%= f.collection_select :watchlist_id, Watchlist.all, :id, :title %><br><br>
+<%= f.collection_select :watchlist_id, current_user.watchlists, :id, :title %><br><br>
 <%= f.radio_button :show_type, 'Series' %>
 <%= f.label 'Series' %>
 <%= f.radio_button :show_type, 'Film' %>
