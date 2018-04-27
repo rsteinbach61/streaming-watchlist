@@ -1,5 +1,5 @@
 class ShowsController < ApplicationController
-  before_action :set_show, only: [:show, :edit, :update, :destroy]
+  before_action :set_show#, only: [:show, :edit, :update, :destroy]
   def new
     @show = Show.new
     @user = current_user

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :current_user
+  before_action :current_user, :require_login
 
   def current_user
     @user = (User.find_by(id: session[:user_id]) || User.new)
@@ -27,4 +27,14 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :access_permitted?
+
+  private
+
+  def require_login
+    #return head(:forbidden) unless logged_in?
+    unless logged_in?
+      flash[:error] = "You must log in."
+      redirect_to root_path
+    end
+  end
 end

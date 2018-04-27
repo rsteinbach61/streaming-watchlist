@@ -1,7 +1,7 @@
 require 'pry'
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-
+  skip_before_action :require_login, only: [:welcome, :new, :create]
   def welcome
   end
 

@@ -1,4 +1,4 @@
-fix error when wrong password entered on sign in
+fix error when wrong password entered on sign in ** return head (:forbidden)
 
 scope method(s)
 
@@ -10,4 +10,6 @@ fix dropdown for watchlists when adding show, should only see lists for current 
 
 use OMDB API to do something cool
 
-add user edit capability
+add user edit capability DONE
+
+add login required to all controllers
