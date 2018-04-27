@@ -12,4 +12,4 @@ use OMDB API to do something cool
 
 add user edit capability DONE
 
-add login required to all controllers
+add login required to all controllers DONE
