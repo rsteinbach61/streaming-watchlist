@@ -36,6 +36,15 @@ class ShowsController < ApplicationController
     redirect_to root_path, notice: 'Show deleted.'
   end
 
+  def search
+    @user = current_user
+  end
+
+  def results
+    genre = params[:genres]
+    @shows = Show.genre(genre)
+  end
+
   private
   def set_show
     @show = Show.find_by(:id => params[:id])

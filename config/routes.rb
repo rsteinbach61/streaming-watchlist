@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-
+  get 'shows/search' => 'shows#search'
+  post 'shows/result' => 'shows#results'
   resources :shows
   resources :watchlists
   resources :users, only: [:show, :new, :create, :edit, :update]
@@ -9,4 +10,6 @@ Rails.application.routes.draw do
   get 'sessions/sign_in' => 'sessions#new'
   post 'sessions/create' => 'sessions#create'
   get "sessions/destroy" => 'sessions#destroy'
+
+
 end

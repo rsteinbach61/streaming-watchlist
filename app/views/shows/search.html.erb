@@ -1,0 +1,5 @@
+search form
+
+<%= form_tag '/shows/result' %>
+  <%= select_tag "genres", options_for_select(['Action', 'Comedy', 'Drama', 'Documentary', 'Animation', 'Other']) %><br><br>
+  <%= submit_tag %>

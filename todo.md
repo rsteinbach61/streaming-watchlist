@@ -4,11 +4,11 @@ scope method(s)
 
 DONE fix sign up form DONE
 
-add genre to show
+DONE add genre to show
 
 DONE add type of show (film or series)
 
-fix dropdown for watchlists when adding show, should only see lists for current user
+DONE fix dropdown for watchlists when adding show, should only see lists for current user
 
 use OMDB API to do something cool
 
@@ -18,4 +18,9 @@ DONE add login required to all controllers DONE
 
 omniauth
 
-remove show_id from watchlists table
+DONE remove show_id from watchlists table
+
+scope method(s)
+  find shows by genre or type or both
+
+  nested resources
