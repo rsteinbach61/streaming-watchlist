@@ -2,4 +2,8 @@ search form
 
 <%= form_tag '/shows/result' %>
   <%= select_tag "genres", options_for_select(['Action', 'Comedy', 'Drama', 'Documentary', 'Animation', 'Other']) %><br><br>
-  <%= submit_tag %>
+  <%= label_tag 'Series'%>
+  <%= radio_button_tag 'type', 'Series' %><br><br>
+  <%= label_tag 'Film'%>
+  <%= radio_button_tag 'type', 'Film' %><br><br>
+  <%= submit_tag 'Search'%>
