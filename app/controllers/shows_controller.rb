@@ -42,7 +42,8 @@ class ShowsController < ApplicationController
 
   def results
     genre = params[:genres]
-    @shows = Show.genre(genre)
+    type = params[:type]
+    @shows = Show.genre(genre).show_type(type)
   end
 
   private
