@@ -23,6 +23,7 @@ class WatchlistsController < ApplicationController
   end
 
   def show
+    @shows = @watchlist.shows
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied.'
     end
