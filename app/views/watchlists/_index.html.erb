@@ -1,7 +1,0 @@
-<h3> Your Watchlists </h3>
-
-<ul>
-  <% current_user.watchlists.each do |w| %>
-    <li><%= link_to w.title, watchlist_path(w) %></li>
-  <% end %>
-</ul>

@@ -3,6 +3,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   skip_before_action :require_login, only: [:welcome, :new, :create]
   def welcome
+    if logged_in?
+      @watchlists = current_user.watchlists
+    end
   end
 
   def show
@@ -20,7 +23,7 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         render '/users/welcome'
       else
-        redirect '/users/new'
+        redirect_to '/users/new'
       end
   end
 
@@ -38,8 +41,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-  end
 
 
 
