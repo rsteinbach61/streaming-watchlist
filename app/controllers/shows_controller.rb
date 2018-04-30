@@ -43,7 +43,13 @@ class ShowsController < ApplicationController
   def results
     genre = params[:genres]
     type = params[:type]
-    @shows = Show.genre(genre).show_type(type)
+    @shows = []
+    Show.genre(genre).show_type(type).each do |show|
+      if show.watchlist.user_id == current_user.id
+        @shows << show
+      end
+    end
+
   end
 
   private
