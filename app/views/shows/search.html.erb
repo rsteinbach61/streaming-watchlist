@@ -1,9 +1,9 @@
-search form
+<h2> Search for Shows by Genre and Type </h2><br>
 
 <%= form_tag '/shows/result' %>
   <%= select_tag "genres", options_for_select(['Action', 'Comedy', 'Drama', 'Documentary', 'Animation', 'Other']) %><br><br>
   <%= label_tag 'Series'%>
-  <%= radio_button_tag 'type', 'Series' %><br><br>
+  <%= radio_button_tag 'type', 'Series', true %><br><br>
   <%= label_tag 'Film'%>
   <%= radio_button_tag 'type', 'Film' %><br><br>
   <%= submit_tag 'Search'%>
