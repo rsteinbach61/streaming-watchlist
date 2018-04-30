@@ -49,7 +49,11 @@ class ShowsController < ApplicationController
         @shows << show
       end
     end
-
+      if @shows.empty?
+        redirect_to shows_search_path, notice: 'Show not found.'
+      else
+        render '/shows/results'
+      end
   end
 
   private
