@@ -1,7 +1,7 @@
 
 
 
-<h3><%= link_to @watchlist.title, edit_watchlist_path(@watchlist) %></h3>
+<h3>Watchlist: <%= link_to @watchlist.title, edit_watchlist_path(@watchlist) %></h3>
 <%= button_to "delete", @watchlist, :method => :delete %>
 
 <table>
@@ -10,7 +10,7 @@
     <th>Genre </th>
     <th>Type </th>
   </tr>
-  
+
     <%= render @shows %><br>
 
 </table>

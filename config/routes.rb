@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'shows/search' => 'shows#search'
   post 'shows/result' => 'shows#results'
-  resources :shows
+  resources :shows do
+    resources :comments
+  end 
   resources :watchlists
   resources :users, only: [:show, :new, :create, :edit, :update]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

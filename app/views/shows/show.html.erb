@@ -2,4 +2,8 @@
 
 
 <h3> <%= @show.show_title %> <%= link_to 'edit', edit_show_path(@show) %></h3>
-<%= button_to "delete", @show, :method => :delete %>
+<%= button_to "delete", @show, :method => :delete %><br>
+<h4> Comments: </h4>
+<h6><%= link_to 'Add a Comment', new_show_comment_path(@show)%></h6>
+
+<%= render 'comments/index' %>

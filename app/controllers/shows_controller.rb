@@ -26,6 +26,7 @@ class ShowsController < ApplicationController
   end
 
   def show
+    @comments = @show.comments
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied'
     end

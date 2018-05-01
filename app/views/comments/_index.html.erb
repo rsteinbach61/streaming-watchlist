@@ -1,0 +1,5 @@
+<ul>
+<% @comments.each do |c| %>
+  <li><%= link_to c.title,  show_comment_path(@show, c)%></li>
+  <% end %>
+</ul>

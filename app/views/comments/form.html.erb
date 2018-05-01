@@ -1,0 +1,6 @@
+<%= form_tag show_comments_path(@show) do |f| %>
+<%= label_tag 'title' %>
+<%= text_field_tag :title %><br><br>
+<%= text_area_tag 'body', nil, size: '50x5' %>
+<%= submit_tag %>
+<% end %>
