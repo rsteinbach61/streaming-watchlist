@@ -27,7 +27,7 @@ class ShowsController < ApplicationController
 
   def show
     @comments = @show.comments
-    details = Details.new(@show.show_title)
+    details = Details.new(@show.show_title, @show.show_type)
     @details = details.get_details
 
     unless access_permitted?

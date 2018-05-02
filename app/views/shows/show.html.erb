@@ -8,6 +8,7 @@
 
 <%= render 'comments/index' %>
 
+<h4> Show Details from OMDB </h4>
 <% if @details["Response"] == "False" %>
     <p><%= @details["Error"] %></p>
 <% else %>
@@ -20,5 +21,6 @@
   <p>Director: <%= @details["Director"] %></p>
   <p>Writer: <%= @details["Writer"] %></p>
   <p>Actors: <%= @details["Actors"] %></p>
+  <p>Type: <%= @details["Type"] %></p>
   <p>Plot: <%= @details["Plot"] %></p>
   <% end %>
