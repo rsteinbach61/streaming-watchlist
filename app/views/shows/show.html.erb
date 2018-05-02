@@ -7,3 +7,8 @@
 <h6><%= link_to 'Add a Comment', new_show_comment_path(@show)%></h6>
 
 <%= render 'comments/index' %>
+<ul>
+<% @details.each do |k, i| %>
+  <li><%= k %>: <%= i %></li>
+  <% end %>
+<ul>

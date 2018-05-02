@@ -27,6 +27,9 @@ class ShowsController < ApplicationController
 
   def show
     @comments = @show.comments
+    details = Details.new(@show.show_title)
+    @details = details.get_details
+    binding.pry
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied'
     end

@@ -1,6 +1,6 @@
 DONE fix error when wrong password entered on sign in ** return head (:forbidden)
 
-scope method(s)
+DONE scope method(s)
 
 DONE fix sign up form DONE
 
@@ -11,6 +11,10 @@ DONE add type of show (film or series)
 DONE fix dropdown for watchlists when adding show, should only see lists for current user
 
 use OMDB API to do something cool
+response = RestClient::Request.execute( method: :get, url: 'http://www.omdbapi.c
+om/?t=blade+runner&plot=full&r=xml&apikey=a8a0eee0')
+
+JSON.parse(response) ["Title"]
 
 DONE add user edit capability DONE
 
@@ -20,7 +24,7 @@ omniauth
 
 DONE remove show_id from watchlists table
 
-scope method(s)
+DONE scope method(s)
   find shows by genre or type or both
 
-  nested resources
+DONE nested resources
