@@ -7,8 +7,18 @@
 <h6><%= link_to 'Add a Comment', new_show_comment_path(@show)%></h6>
 
 <%= render 'comments/index' %>
-<ul>
-<% @details.each do |k, i| %>
-  <li><%= k %>: <%= i %></li>
+
+<% if @details["Response"] == "False" %>
+    <p><%= @details["Error"] %></p>
+<% else %>
+  <p>Title: <%= @details["Title"] %></p>
+  <p>Year: <%= @details["Year"] %></p>
+  <p>Rated: <%= @details["Rated"] %></p>
+  <p>Released <%= @details["Released"] %></p>
+  <p>Runtime: <%= @details["Runtime"] %></p>
+  <p>Genre: <%= @details["Genre"] %></p>
+  <p>Director: <%= @details["Director"] %></p>
+  <p>Writer: <%= @details["Writer"] %></p>
+  <p>Actors: <%= @details["Actors"] %></p>
+  <p>Plot: <%= @details["Plot"] %></p>
   <% end %>
-<ul>
