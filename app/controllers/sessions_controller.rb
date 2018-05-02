@@ -7,19 +7,36 @@ skip_before_action :require_login, only: [:new, :create]
 
 
   def create
-    @user = User.find_by(name: params[:user][:name])
-    if @user && @user.authenticate(params[:user][:password])
+    if auth['uid']
+      @user = User.find_or_create_by(uid: auth['uid']) do |u|
+        u.name = auth['info']['name']
+        u.email = auth['info']['email']
+        u.password = SecureRandom.hex
+        u.save
+      end
       session[:user_id] = @user.id
       render '/users/welcome'
     else
-      flash[:error] = "Log in failed."
-      redirect_to '/sessions/sign_in'
+      @user = User.find_by(name: params[:user][:name])
+        if @user && @user.authenticate(params[:user][:password])
+          session[:user_id] = @user.id
+          render '/users/welcome'
+        else
+          flash[:error] = "Log in failed."
+          redirect_to '/sessions/sign_in'
+        end
     end
   end
 
   def destroy
     session.delete("user_id")
     redirect_to root_path, notice: 'Log out successful.'
+  end
+
+  private
+
+  def auth
+    request.env['omniauth.auth']
   end
 
 end
