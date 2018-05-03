@@ -5,6 +5,9 @@
     <ul>
     <% @show.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
+      <% if msg == "Watchlist can't be blank" %>
+      <%= link_to "Create a Watchlist", new_watchlist_path %>
+      <% end %>
     <% end %>
     </ul>
   </div>
