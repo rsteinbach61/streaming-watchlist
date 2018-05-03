@@ -1,7 +1,6 @@
 class Details
 
   def initialize(show, type)
-
     @show = show.gsub(" ","+")
     @type = type
   end

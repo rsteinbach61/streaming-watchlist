@@ -2,16 +2,19 @@ require 'pry'
 class CommentsController < ApplicationController
 
   def new
-
     @show = Show.find_by(:id => params[:show_id])
     @comment = Comment.new
     render 'form'
   end
 
   def create
-
-  @comment = Comment.create(comment_params)
-  redirect_to show_path(@comment.show_id)
+    @show = Show.find_by(:id => params[:show_id])
+    @comment = Comment.create(comment_params)
+      if @comment.save
+        redirect_to show_path(@comment.show_id)
+      else
+        render 'form'
+      end
   end
 
   def edit
