@@ -7,7 +7,7 @@ skip_before_action :require_login, only: [:new, :create]
 
 
   def create
-    if auth['uid']
+    if auth
       @user = User.find_or_create_by(uid: auth['uid']) do |u|
         u.name = auth['info']['name']
         u.email = auth['info']['email']
