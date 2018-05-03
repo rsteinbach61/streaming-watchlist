@@ -8,7 +8,11 @@ class ShowsController < ApplicationController
   def create
     @user = current_user
     @show = Show.create(show_params)
-    redirect_to root_path, notice: 'Show created.'
+    if @show.save
+      redirect_to root_path, notice: 'Show created.'
+    else
+      render new_show_path
+    end
   end
 
   def edit

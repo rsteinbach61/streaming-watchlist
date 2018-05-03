@@ -1,10 +1,20 @@
+<% if @show.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@show.errors.count, "error") %> prohibited this user from being saved:</h2>
 
+    <ul>
+    <% @show.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <%= form_for @show do |f| %>
   <%= f.label :show_title %>
   <%= f.text_field :show_title %><br><br>
   <%= f.label 'Choose a Watchlist' %>
   <%= f.collection_select :watchlist_id, current_user.watchlists, :id, :title %><br><br>
-  <%= f.radio_button :show_type, 'Series' %>
+  <%= f.radio_button :show_type, 'Series'%>
   <%= f.label 'Series' %>
   <%= f.radio_button :show_type, 'Movie' %>
   <%= f.label 'Movie' %><br><br>
