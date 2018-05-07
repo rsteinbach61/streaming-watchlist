@@ -10,9 +10,10 @@
   </div>
 <% end %>
 
+<%= error_helper(@watchlist) %>
 
 <%= form_for @watchlist do |f| %>
-<%= f.label :title %>
-<%= f.text_field :title %>
-<%= f.submit %>
+<div><%= f.label :title %></div>
+<div><%= f.text_field :title %></div><br>
+<div><%= f.submit %></div>
 <% end %>

@@ -34,7 +34,6 @@ class WatchlistsController < ApplicationController
   end
 
   def index
-    binding.pry
     @watchlists = Watchlist.all
   end
 
