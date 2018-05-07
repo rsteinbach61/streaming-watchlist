@@ -1,16 +1,9 @@
 <% if @watchlist.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@watchlist.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-    <ul>
-    <% @watchlist.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
+  <%= error_helper(@watchlist) %>
+  <%= error_list(@watchlist) %>
 <% end %>
 
-<%= error_helper(@watchlist) %>
+
 
 <%= form_for @watchlist do |f| %>
 <div><%= f.label :title %></div>

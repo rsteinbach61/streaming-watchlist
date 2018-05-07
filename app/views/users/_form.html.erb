@@ -1,11 +1,8 @@
 
 <% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
     <%= error_helper(@user) %>
+    <%= error_list(@user) %>
 <% end %>
-
 
 <%= form_for(@user) do |f| %>
 Name: <%= f.text_field :name %>
