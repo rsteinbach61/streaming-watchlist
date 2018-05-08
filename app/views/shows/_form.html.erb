@@ -1,15 +1,6 @@
 <% if @show.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@show.errors.count, "error") %> prohibited this Show from being saved:</h2>
-
-    <ul>
-    <% @show.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-      <% if msg == "Watchlist can't be blank" %>
-      <%= link_to "Create a Watchlist", new_watchlist_path %>
-      <% end %>
-    <% end %>
-    </ul>
+    <%= error_helper(@show) %>
+    <%= error_list(@show) %>
   </div>
 <% end %>
 <%= form_for @show do |f| %>

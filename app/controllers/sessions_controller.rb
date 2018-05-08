@@ -8,12 +8,7 @@ skip_before_action :require_login, only: [:new, :create]
 
   def create
     if auth
-      @user = User.find_or_create_by(uid: auth['uid']) do |u|
-        u.name = auth['info']['name']
-        u.email = auth['info']['email']
-        u.password = SecureRandom.hex
-        u.save
-      end
+      @user = User.find_or_create_by_omniauth(auth)
       session[:user_id] = @user.id
       render '/users/welcome'
     else
