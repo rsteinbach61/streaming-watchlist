@@ -39,6 +39,11 @@ class ShowsController < ApplicationController
     end
   end
 
+  def index
+    @shows = current_user.shows
+  end
+
+
   def destroy
     @show.destroy
     redirect_to root_path, notice: 'Show deleted.'

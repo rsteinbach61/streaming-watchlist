@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   def new
     @show = Show.find_by(:id => params[:show_id])
     @comment = Comment.new
-    render 'form'
+
   end
 
   def create
@@ -13,11 +13,13 @@ class CommentsController < ApplicationController
       if @comment.save
         redirect_to show_path(@comment.show_id)
       else
-        render 'form'
+        render partial: '/comments/form'
       end
   end
 
   def edit
+
+    @comment = Comment.find_by(:id => params[:id])
   end
 
   def update
@@ -36,8 +38,8 @@ class CommentsController < ApplicationController
   end
 
   private
-  def set_show
-    @show = Show.find_by(:id => params[:id])
+  def set_comment
+    @comment = Comment.find_by(:id => params[:id])
   end
 
   def comment_params

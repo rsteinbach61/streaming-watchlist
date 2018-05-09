@@ -34,7 +34,9 @@ class WatchlistsController < ApplicationController
   end
 
   def index
-    @watchlists = Watchlist.all
+    binding.pry
+    @user = current_user
+    @watchlists = @user.watchlists
   end
 
   def destroy

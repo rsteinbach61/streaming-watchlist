@@ -2,3 +2,4 @@
 <h3><%= @comment.title %></h3>
 
 <p><%= @comment.body %></p>
+<%= link_to "edit", edit_show_comment_path(@comment.show_id, @comment) %>
