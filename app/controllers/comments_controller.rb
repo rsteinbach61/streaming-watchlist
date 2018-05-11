@@ -20,6 +20,7 @@ class CommentsController < ApplicationController
   def edit
 
     @comment = Comment.find_by(:id => params[:id])
+    @show = Show.find_by(:id => params[:show_id])
   end
 
   def update
