@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
 
   def create
     @show = Show.find_by(:id => params[:show_id])
-    @comment = Comment.create(comment_params)
+    @comment = @show.comments.build(comment_params[:comment])
+
       if @comment.save
         redirect_to show_path(@comment.show_id)
       else
@@ -18,12 +19,21 @@ class CommentsController < ApplicationController
   end
 
   def edit
-
     @comment = Comment.find_by(:id => params[:id])
     @show = Show.find_by(:id => params[:show_id])
   end
 
   def update
+
+    @show = Show.find_by(:id => params[:show_id])
+    @comment = Comment.find_by(:id => params[:id])
+    @comment.update(comment_params[:comment])
+    if @comment.save
+      redirect_to show_path(@comment.show_id)
+    else
+      render partial: '/comments/form'
+    end
+
   end
 
   def show
@@ -44,7 +54,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.permit(:title, :body, :show_id)
+    params.permit(:show_id, comment: [:title, :body])
   end
 
 end

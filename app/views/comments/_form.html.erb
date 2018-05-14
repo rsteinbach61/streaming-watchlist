@@ -4,9 +4,8 @@
   <%= error_list(@comment) %>
 <% end %>
 
-<%= form_tag show_comments_path(@show) do |f| %>
-<%= label_tag 'title' %>
-<%= text_field_tag :title, @comment.title %><br><br>
-<%= text_area_tag :body, @comment.body, size: '50x5' %>
-<%= submit_tag %>
-<% end %>
+<%= form_for [@show, @comment] do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end%>
