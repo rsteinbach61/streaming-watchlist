@@ -8,24 +8,30 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <a class="navbar-brand" href="<%= root_path %>"/>Home</a>
-        <div class=navlinks>
-          <% if logged_in? %>
-            <p><%= link_to "Log Out", sessions_destroy_path %></p>
-            <p><%= link_to current_user.name, user_path(current_user.id) %></p>
-          <% else %>
-            <p><%= link_to "Sign Up", new_user_path %></p>
-            <p><%= link_to "Sign In", sessions_sign_in_path %></p>
-            <p><%= link_to "Log in with Amazon", '/auth/amazon' %></p>
-          <% end %>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <a class="navbar-brand" href="<%= root_path %>"/>Home</a>
+      <div class=navlinks>
+        <% if logged_in? %>
+          <p><%= link_to "Log Out", sessions_destroy_path %></p>
+          <p><%= link_to current_user.name, user_path(current_user.id) %></p>
+        <% else %>
+          <p><%= link_to "Sign Up", new_user_path %></p>
+          <p><%= link_to "Sign In", sessions_sign_in_path %></p>
+          <p><%= link_to "Log in with Amazon", '/auth/amazon' %></p>
+        <% end %>
+      </div>
+  </div>
+      <div class="flex-container">
+        <div class="background">
+          <div class="content">
+            <% flash.each do |name, msg| -%>
+            <%= content_tag :div, msg, class: name %>
+            <% end -%>
+            <%= yield %>
+          </div>
         </div>
-    </div>
-    <% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-    <% end -%>
+      </div>
 
-    <%= yield %>
   </body>
 </html>
