@@ -12,7 +12,7 @@ DONE fix dropdown for watchlists when adding show, should only see lists for cur
 
 use OMDB API to do something cool
 response = RestClient::Request.execute( method: :get, url: 'http://www.omdbapi.c
-om/?t=blade+runner&plot=full&r=xml&apikey=a8a0eee0')
+om/?t=blade+runner&plot=full&r=xml&apikey=')
 
 JSON.parse(response) ["Title"]
 
@@ -20,7 +20,7 @@ DONE add user edit capability DONE
 
 DONE add login required to all controllers DONE
 
-omniauth
+DONE omniauth
 
 DONE remove show_id from watchlists table
 
