@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
       if @comment.save
         redirect_to show_path(@comment.show_id)
       else
-        render partial: '/comments/form'
+        render show_comments_path
       end
   end
 
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to show_path(@comment.show_id)
     else
-      render partial: '/comments/form'
+      render show_comments_path
     end
 
   end

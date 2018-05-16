@@ -6,7 +6,7 @@ class Details
   end
 
   def get_details
-    response = RestClient::Request.execute( method: :get, url: 'http://www.omdbapi.com/?t=' + @show + '&type=' + @type + '&plot=full&apikey=a8a0eee0')
+    response = RestClient::Request.execute( method: :get, url: 'http://www.omdbapi.com/?t=' + @show + '&type=' + @type + '&plot=full&apikey=' + ENV['OMDB_API_KEY'])
     JSON.parse(response)
   end
 end
