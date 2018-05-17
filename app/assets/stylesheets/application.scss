@@ -22,10 +22,13 @@ html {
 }
 
  body {
-   padding-top: 50px;
-   padding-bottom: 30px;
-   padding-left: 20px;
-   height: 100vh;
+   padding-top: 100px;
+   background: url("tv2.jpg");
+   background-position: center center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   background-size: cover;
+  
  }
 
  .navlinks {
@@ -56,16 +59,8 @@ td, th {
   display: flex;
   align-items: center;
   height: 100%;
-  background: url("tv.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+
   width: 100%;
-}
-
-.background {
-
 }
 
 .content {

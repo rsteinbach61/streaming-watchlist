@@ -10,7 +10,7 @@ DONE add type of show (film or series)
 
 DONE fix dropdown for watchlists when adding show, should only see lists for current user
 
-use OMDB API to do something cool
+DONE use OMDB API to do something cool
 response = RestClient::Request.execute( method: :get, url: 'http://www.omdbapi.c
 om/?t=blade+runner&plot=full&r=xml&apikey=')
 
