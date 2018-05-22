@@ -16,6 +16,7 @@ class ShowsController < ApplicationController
   end
 
   def edit
+    #use the access_permitted helper to determine if the current user can edit this show
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied'
     end
@@ -31,7 +32,10 @@ class ShowsController < ApplicationController
 
   def show
     @comments = @show.comments
+    # create new show_details class object (details) using the title and type of @show
     details = Details.new(@show.show_title, @show.show_type)
+    # use that details object to call the get_details method and return results to @details
+    # for use in shows/show view
     @details = details.get_details
 
     unless access_permitted?

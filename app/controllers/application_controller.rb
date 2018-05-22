@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-    #return head(:forbidden) unless logged_in?
+  
     unless logged_in?
       flash[:error] = "You must log in."
       redirect_to root_path
