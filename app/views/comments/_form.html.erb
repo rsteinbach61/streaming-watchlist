@@ -5,7 +5,9 @@
 <% end %>
 
 <%= form_for [@show, @comment] do |f| %>
-  <%= f.text_field :title %>
-  <%= f.text_area :body %>
+  <%= f.label 'Comment Title' %>
+  <%= f.text_field :title %><br><br>
+  <%= f.label 'Comment' %>
+  <%= f.text_area :body %><br><br>
   <%= f.submit %>
 <% end%>
