@@ -23,23 +23,27 @@ class ShowsController < ApplicationController
   end
 
   def update
-    if @show.update(show_params)
-      redirect_to show_path(@show), notice: 'Show updated.'
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
     else
-      render :edit
+      if @show.update(show_params)
+        redirect_to show_path(@show), notice: 'Show updated.'
+      else
+        render :edit
+      end
     end
   end
 
   def show
-    @comments = @show.comments
-    # create new show_details class object (details) using the title and type of @show
-    details = Details.new(@show.show_title, @show.show_type)
-    # use that details object to call the get_details method and return results to @details
-    # for use in shows/show view
-    @details = details.get_details
-
+    # helper method in application controller to check if current_user owns the show requested
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied'
+    else
+      @comments = @show.comments
+      # create new show_details class object (details) using the title and type of @show
+      details = Details.new(@show.show_title, @show.show_type)
+      # use that details object to call the get_details method and return results to @details for use in shows/show view
+      @details = details.get_details
     end
   end
 
@@ -49,8 +53,12 @@ class ShowsController < ApplicationController
 
 
   def destroy
-    @show.destroy
-    redirect_to root_path, notice: 'Show deleted.'
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
+    else
+      @show.destroy
+      redirect_to root_path, notice: 'Show deleted.'
+    end
   end
 
   def search
