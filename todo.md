@@ -28,3 +28,11 @@ DONE scope method(s)
   find shows by genre or type or both
 
 DONE nested resources
+
+fix display on no watchlist errors
+
+fix display on comments new
+
+fix no display of WL on log in w/ Amazon
+
+seed?
