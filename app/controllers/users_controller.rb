@@ -23,7 +23,6 @@ class UsersController < ApplicationController
         session[:user_id] = @user.id
         render '/users/welcome'
       else
-
         render '/users/new'
       end
   end
@@ -35,10 +34,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to user_path(@user), notice: 'User updated.'
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
     else
-      render :edit
+      if @user.update(user_params)
+        redirect_to user_path(@user), notice: 'User updated.'
+      else
+        render :edit
+      end
     end
   end
 

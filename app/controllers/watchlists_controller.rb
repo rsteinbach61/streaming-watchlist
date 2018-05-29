@@ -16,32 +16,44 @@ class WatchlistsController < ApplicationController
   end
 
   def edit
+    # helper to check if current user can edit this watchlist
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied.'
     end
   end
 
   def update
-    @watchlist.update(watchlist_params)
-    redirect_to root_path, notice: 'Watchlist successfully updated.'
+    # helper to check if current user can update this watchlist
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied.'
+    else
+      @watchlist.update(watchlist_params)
+      redirect_to root_path, notice: 'Watchlist successfully updated.'
+    end
   end
 
   def show
-    @shows = @watchlist.shows
+    # helper to check if current user can view this watchlist
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied.'
+    else
+      @shows = @watchlist.shows
     end
   end
 
   def index
-    binding.pry
     @user = current_user
     @watchlists = @user.watchlists
   end
 
   def destroy
-    @watchlist.destroy
-    redirect_to root_path, notice: 'Watch list deleted.'
+    # helper to check if current user can delete this watchlist
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied.'
+    else
+      @watchlist.destroy
+      redirect_to root_path, notice: 'Watch list deleted.'
+    end
   end
 
   private
