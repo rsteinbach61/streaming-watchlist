@@ -19,25 +19,39 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find_by(:id => params[:id])
-    @show = Show.find_by(:id => params[:show_id])
+    #use the access_permitted helper to determine if the current user can edit this comment
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
+    else
+      @comment = Comment.find_by(:id => params[:id])
+      @show = Show.find_by(:id => params[:show_id])
+    end
   end
 
   def update
-
-    @show = Show.find_by(:id => params[:show_id])
-    @comment = Comment.find_by(:id => params[:id])
-    @comment.update(comment_params[:comment])
-    if @comment.save
-      redirect_to show_path(@comment.show_id)
+    #use the access_permitted helper to determine if the current user can edit this comment
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
     else
-      render show_comments_path
+      @show = Show.find_by(:id => params[:show_id])
+      @comment = Comment.find_by(:id => params[:id])
+      @comment.update(comment_params[:comment])
+      if @comment.save
+        redirect_to show_path(@comment.show_id)
+      else
+        render show_comments_path
+      end
     end
 
   end
 
   def show
-    @comment = Comment.find_by(:id => params[:id])
+    #use the access_permitted helper to determine if the current user can edit this comment
+    unless access_permitted?
+      redirect_to root_path, notice: 'Access denied'
+    else
+      @comment = Comment.find_by(:id => params[:id])
+    end
   end
 
   def index

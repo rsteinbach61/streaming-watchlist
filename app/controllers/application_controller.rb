@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
     elsif params[:controller] == 'users'
       user = User.find_by(:id => params[:id])
       current_user.id == user.id
+    elsif params[:controller] == 'comments'
+      comment = Comment.find_by(:id => params[:id])
+      current_user.id == comment.show.watchlist.user_id
     end
   end
   helper_method :access_permitted?
@@ -31,7 +34,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_login
-  
+
     unless logged_in?
       flash[:error] = "You must log in."
       redirect_to root_path
