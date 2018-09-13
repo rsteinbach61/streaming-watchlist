@@ -59,6 +59,7 @@ class CommentsController < ApplicationController
     if logged_in?
       @show = Show.find_by(:id => params[:show_id])
       @comments = @show.comments
+      render json: @comments
     end
   end
 

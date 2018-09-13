@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 gem 'omniauth'
 gem 'omniauth-amazon'
-
+gem 'active_model_serializers'
 gem 'dotenv-rails'
 
 gem 'rest-client'
