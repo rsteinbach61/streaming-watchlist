@@ -16,10 +16,11 @@ function displayComments(){
   show = document.querySelector("#get_comments")
   $.get(`/shows/${show.dataset.show}/comments`, function(comments){
     comments.data.forEach(function(c){
-      $("#comments").append(`<p onclick="getComment(${c.id})">${c.attributes.title}</p>`);
+      $("#comments").append(`<p onclick="getComment(${c.id}, ${show.dataset.show})">${c.attributes.title}</p>`);
 })})
 }
 
-function getComment(id){
-  alert("get comment")
+function getComment(comment_id, show_id){
+  alert(show_id + " " + comment_id)
+
 }
