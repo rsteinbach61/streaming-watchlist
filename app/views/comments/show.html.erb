@@ -1,5 +1,9 @@
+<div>
+<h3 id="comment_title"><%= @comment.title %></h3>
 
-<h3><%= @comment.title %></h3>
-
-<p><%= @comment.body %></p>
-<%= link_to "edit", edit_show_comment_path(@comment.show_id, @comment) %>
+<p id="comment_body"><%= @comment.body %></p>
+<%= link_to "edit", edit_show_comment_path(@comment.show_id, @comment) %><br>
+<button id="next_comment", data-comment="<%=@comment.id%>" data-show="<%=@comment.show_id%>" onclick="nextComment()">Next</button>
+<button id="add_comment" onclick="addCommentForm()">Add Comment</button>
+</div><br>
+<div id="form_div" class="flex-container"></div>

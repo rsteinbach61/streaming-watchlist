@@ -1,6 +1,6 @@
 require 'pry'
 class CommentsController < ApplicationController
-
+skip_before_action :require_login
   def new
     @show = Show.find_by(:id => params[:show_id])
     @comment = Comment.new
@@ -8,14 +8,18 @@ class CommentsController < ApplicationController
   end
 
   def create
+
     @show = Show.find_by(:id => params[:show_id])
     @comment = @show.comments.build(comment_params[:comment])
 
-      if @comment.save
-        redirect_to show_path(@comment.show_id)
-      else
-        render show_comments_path
-      end
+      @comment.save
+
+
+        respond_to do |format|
+          format.html {render "/comments/index"}
+          format.json {render json: @comments.to_json(only: [:title, :body, :id])}
+        end
+    
   end
 
   def edit
@@ -51,15 +55,22 @@ class CommentsController < ApplicationController
       redirect_to root_path, notice: 'Access denied'
     else
       @comment = Comment.find_by(:id => params[:id])
+        respond_to do |format|
+          format.html {render "/comments/show"}
+          format.json {render json: @comment.to_json(only: [:title, :body, :id])}
+        end
+
     end
   end
 
   def index
-
     if logged_in?
       @show = Show.find_by(:id => params[:show_id])
       @comments = @show.comments
-      render json: @comments
+      respond_to do |format|
+        format.html {render "/comments/index"}
+        format.json {render json: @comments.to_json(only: [:title, :body, :id])}
+      end
     end
   end
 

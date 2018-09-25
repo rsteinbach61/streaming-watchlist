@@ -6,8 +6,8 @@
 <h4> Comments: </h4>
 <h6><%= link_to 'Add a Comment', new_show_comment_path(@show)%></h6>
 
-<button id="get_comments", data-show="<%=@show.id%>">Get Comments</button>
-<div id="comments"></div>
+<button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
+<ul id="comments"></ul>
 
 <h4> Show Details from OMDB </h4>
 <% if @details["Response"] == "False" %>
