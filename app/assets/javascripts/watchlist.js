@@ -79,16 +79,27 @@ function nextComment(){
     })
   }
 
+//async function fetchComments(){
+  //let show = document.querySelector("#get_comments");
+  //const url = `/shows/${show.dataset.show}/comments.json`;
+  //const fetchResult = fetch(url);
+  //const response = await fetchResult;
+  //const jsonData = await response.json();
+  //eturn jsonData;
+//}
 
+function testgetComments(){
+  let myJson = fetchComments();
+  alert(myJson);
+}
 
+async function getComments(){
+  let show = document.querySelector("#get_comments") // used to get the show ID
+    const url = `/shows/${show.dataset.show}/comments.json`;
+    const fetchResult = fetch(url);
+    const response = await fetchResult;
+    const myJson = await response.json();
 
-
-function getComments(){
-  show = document.querySelector("#get_comments") // used to get the show ID
-
-  fetch(`/shows/${show.dataset.show}/comments.json`).then(function(response){
-    return response.json();})
-    .then(function(myJson){
       myJson.forEach(function(c){
         let a = document.createElement('a');
         let text = document.createTextNode(`${c.title}`);
@@ -96,5 +107,5 @@ function getComments(){
         a.setAttribute('href',`/shows/${show.dataset.show}/comments/${c.id}`);
         document.getElementById('comments').appendChild(a);
       });
-    });
+    //});
 }
