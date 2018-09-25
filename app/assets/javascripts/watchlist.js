@@ -55,28 +55,34 @@ function addComment(){
     }
   }).then(function(response){
 
-    return response;})
+    return response.json();})
     .then(function(commentData){
       alert(commentData[0].title);
     })
   }
 
 
-function nextComment(){
-  show = document.querySelector("#next_comment") // used to get the comment ID
-  fetch(`/shows/${show.dataset.show}/comments.json`).then(function(response){
-    return response.json();})
-    .then(function(next_comment){
-    let index = next_comment.findIndex(key => key.id.toString() == show.dataset.comment) + 1;
+async function nextComment(){
+  let show = document.querySelector("#next_comment") // used to get the comment ID
+  //fetch(`/shows/${show.dataset.show}/comments.json`).then(function(response){
+    //return response.json();})
+    //.then(function(next_comment){
+
+      const url = `/shows/${show.dataset.show}/comments.json`;
+      const fetchResult = fetch(url);
+      const response = await fetchResult;
+      const nextComment = await response.json();
+
+    let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
     let newId = (index + 1).toString();
-      if (index < next_comment.length){
-        document.getElementById("comment_title").innerHTML = next_comment[index].title;
-        document.getElementById("comment_body").innerHTML = next_comment[index].body;
+      if (index < nextComment.length){
+        document.getElementById("comment_title").innerHTML = nextComment[index].title;
+        document.getElementById("comment_body").innerHTML = nextComment[index].body;
         document.getElementById('next_comment').setAttribute('data-comment', `${newId}`);
       } else {
         alert("That's the last comment!");
       }
-    })
+    //})
   }
 
 //async function fetchComments(){
@@ -85,7 +91,7 @@ function nextComment(){
   //const fetchResult = fetch(url);
   //const response = await fetchResult;
   //const jsonData = await response.json();
-  //eturn jsonData;
+  //return jsonData;
 //}
 
 function testgetComments(){
