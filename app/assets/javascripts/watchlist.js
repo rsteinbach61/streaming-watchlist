@@ -104,28 +104,20 @@ async function nextComment(){
 
   }
 
-//async function fetchComments(){
-  //let show = document.querySelector("#get_comments");
-  //const url = `/shows/${show.dataset.show}/comments.json`;
-  //const fetchResult = fetch(url);
-  //const response = await fetchResult;
-  //const jsonData = await response.json();
-  //return jsonData;
-//}
+async function fetchComments(){
+  let show = document.querySelector("#get_comments");
+  const url = `/shows/${show.dataset.show}/comments.json`;
+  const fetchResult = fetch(url);
+  const response = await fetchResult;
+  const jsonData = await response.json();
+  return jsonData;
+}
 
-////function testgetComments(){
-  //let myJson = fetchComments();
-  //alert(myJson);
-//}
-
-async function getComments(){
+function getComments(){
   let show = document.querySelector("#get_comments") // used to get the show ID
-    const url = `/shows/${show.dataset.show}/comments.json`;
-    const fetchResult = fetch(url);
-    const response = await fetchResult;
-    const myJson = await response.json();
-
-      myJson.forEach(function(c){
+    let myJson = fetchComments();
+      myJson.then(function(c){
+        c.forEach(function(c){
         let li = document.createElement('li');
         let a = document.createElement('a');
         let text = document.createTextNode(`${c.title}`);
@@ -135,5 +127,7 @@ async function getComments(){
         document.getElementById('comments').appendChild(li);
 
       });
+    })
+
     //});
 }
