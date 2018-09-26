@@ -85,9 +85,6 @@ async function newaddComment(){
 
 async function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
-  //fetch(`/shows/${show.dataset.show}/comments.json`).then(function(response){
-    //return response.json();})
-    //.then(function(next_comment){
 
       const url = `/shows/${show.dataset.show}/comments.json`;
       const fetchResult = fetch(url);
@@ -96,7 +93,6 @@ async function nextComment(){
 
     let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
 
-    //debugger;
       if (index < nextComment.length){
         let newId = nextComment[index].id.toString();
         document.getElementById("comment_title").innerHTML = nextComment[index].title;
@@ -105,7 +101,7 @@ async function nextComment(){
       } else {
         alert("That's the last comment!");
       }
-    //})
+
   }
 
 //async function fetchComments(){
@@ -117,10 +113,10 @@ async function nextComment(){
   //return jsonData;
 //}
 
-function testgetComments(){
-  let myJson = fetchComments();
-  alert(myJson);
-}
+////function testgetComments(){
+  //let myJson = fetchComments();
+  //alert(myJson);
+//}
 
 async function getComments(){
   let show = document.querySelector("#get_comments") // used to get the show ID
@@ -130,11 +126,14 @@ async function getComments(){
     const myJson = await response.json();
 
       myJson.forEach(function(c){
+        let li = document.createElement('li');
         let a = document.createElement('a');
         let text = document.createTextNode(`${c.title}`);
         a.appendChild(text);
         a.setAttribute('href',`/shows/${show.dataset.show}/comments/${c.id}`);
-        document.getElementById('comments').appendChild(a);
+        li.appendChild(a);
+        document.getElementById('comments').appendChild(li);
+
       });
     //});
 }
