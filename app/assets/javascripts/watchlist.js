@@ -86,12 +86,10 @@ async function newaddComment(){
 async function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
 
-      const url = `/shows/${show.dataset.show}/comments.json`;
-      const fetchResult = fetch(url);
-      const response = await fetchResult;
-      const nextComment = await response.json();
+    let myJson = fetchComments("#next_comment");
+    myJson.then(function(nextComment){
 
-    let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
+      let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
 
       if (index < nextComment.length){
         let newId = nextComment[index].id.toString();
@@ -101,11 +99,11 @@ async function nextComment(){
       } else {
         alert("That's the last comment!");
       }
-
+    })
   }
 
-async function fetchComments(){
-  let show = document.querySelector("#get_comments");
+async function fetchComments(id){
+  let show = document.querySelector(id);
   const url = `/shows/${show.dataset.show}/comments.json`;
   const fetchResult = fetch(url);
   const response = await fetchResult;
@@ -115,7 +113,7 @@ async function fetchComments(){
 
 function getComments(){
   let show = document.querySelector("#get_comments") // used to get the show ID
-    let myJson = fetchComments();
+    let myJson = fetchComments("#get_comments");
       myJson.then(function(c){
         c.forEach(function(c){
         let li = document.createElement('li');
@@ -129,5 +127,4 @@ function getComments(){
       });
     })
 
-    //});
 }
