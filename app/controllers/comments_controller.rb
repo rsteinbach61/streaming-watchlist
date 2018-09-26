@@ -11,15 +11,12 @@ skip_before_action :require_login
 
     @show = Show.find_by(:id => params[:show_id])
     @comment = @show.comments.build(comment_params[:comment])
-
-      @comment.save
-
-
-        respond_to do |format|
-          format.html {render "/comments/index"}
-          format.json {render json: @comments.to_json(only: [:title, :body, :id])}
-        end
-    
+    @comment.save
+    @comments = @show.comments
+      respond_to do |format|
+        format.html {render "/comments/index"}
+        format.json {render json: @comments.to_json(only: [:title, :body, :id])}
+      end
   end
 
   def edit

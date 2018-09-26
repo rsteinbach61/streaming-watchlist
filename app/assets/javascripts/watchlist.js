@@ -57,7 +57,8 @@ function addComment(){
 
     return response.json();})
     .then(function(commentData){
-      alert(commentData[0].title);
+      debugger;
+      alert(commentData[commentData.length - 1].title);
     })
   }
 //async function newaddComment(){
