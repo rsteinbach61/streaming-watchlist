@@ -60,7 +60,28 @@ function addComment(){
       alert(commentData[0].title);
     })
   }
+async function newaddComment(){
+  event.preventDefault();
+  var title = document.getElementById("cTitle").value
+  var cBody = document.getElementById("cBody").value
+  var data = {title: `${title}`, body: `${cBody}`}
+  //somehow get the show ID
+  let show = document.querySelector("#next_comment");
+  const settings = {
+    method: 'POST',
+    headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+    }
+  };
 
+  const fetchResult = await fetch(`/shows/${show.dataset.show}/comments.json`, settings);
+  //.then(response => response.json())
+  //.then(json => { return json;});
+  const response = await fetchResult;
+  const commentJson = await response.json();
+  alert(commentJson);
+}
 
 async function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
@@ -74,8 +95,10 @@ async function nextComment(){
       const nextComment = await response.json();
 
     let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
-    let newId = (index + 1).toString();
+
+    //debugger;
       if (index < nextComment.length){
+        let newId = nextComment[index].id.toString();
         document.getElementById("comment_title").innerHTML = nextComment[index].title;
         document.getElementById("comment_body").innerHTML = nextComment[index].body;
         document.getElementById('next_comment').setAttribute('data-comment', `${newId}`);
