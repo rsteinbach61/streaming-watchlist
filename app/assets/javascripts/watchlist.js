@@ -60,28 +60,28 @@ function addComment(){
       alert(commentData[0].title);
     })
   }
-async function newaddComment(){
-  event.preventDefault();
-  var title = document.getElementById("cTitle").value
-  var cBody = document.getElementById("cBody").value
-  var data = {title: `${title}`, body: `${cBody}`}
+//async function newaddComment(){
+  //event.preventDefault();
+  //var title = document.getElementById("cTitle").value
+  //var cBody = document.getElementById("cBody").value
+  //var data = {title: `${title}`, body: `${cBody}`}
   //somehow get the show ID
-  let show = document.querySelector("#next_comment");
-  const settings = {
-    method: 'POST',
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-    }
-  };
+  //let show = document.querySelector("#next_comment");
+  //onst settings = {
+    //method: 'POST',
+    //headers: {
+        //Accept: 'application/json',
+        //'Content-Type': 'application/json',
+    //}
+  //};
 
-  const fetchResult = await fetch(`/shows/${show.dataset.show}/comments.json`, settings);
+  //const fetchResult = await fetch(`/shows/${show.dataset.show}/comments.json`, settings);
   //.then(response => response.json())
   //.then(json => { return json;});
-  const response = await fetchResult;
-  const commentJson = await response.json();
-  alert(commentJson);
-}
+  //const response = await fetchResult;
+  //const commentJson = await response.json();
+  //alert(commentJson);
+//}
 
 async function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
