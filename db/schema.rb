@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180502185235) do
+ActiveRecord::Schema.define(version: 20180927231405) do
 
   create_table "comments", force: :cascade do |t|
     t.string "title"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180502185235) do
     t.integer "watchlist_id"
     t.string "genre"
     t.string "show_type"
+    t.string "vote"
   end
 
   create_table "users", force: :cascade do |t|

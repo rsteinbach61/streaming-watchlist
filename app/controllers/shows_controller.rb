@@ -8,6 +8,7 @@ class ShowsController < ApplicationController
   def create
     @user = current_user
     @show = Show.create(show_params)
+    @show.vote = "0"
     if @show.save
       redirect_to root_path, notice: 'Show created.'
     else
@@ -91,6 +92,6 @@ class ShowsController < ApplicationController
   end
 
   def show_params
-    params.require(:show).permit(:show_title, :watchlist_id, :show_type, :genre)
+    params.require(:show).permit(:show_title, :watchlist_id, :show_type, :genre, :vote)
   end
 end

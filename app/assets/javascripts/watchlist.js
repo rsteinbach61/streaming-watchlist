@@ -153,7 +153,7 @@ function vote(id){
 }
 
 Show.prototype.upVote = function(){
-  alert("up vote");
+  alert(this.title);
 }
 
 function Comment(title, body, id){
