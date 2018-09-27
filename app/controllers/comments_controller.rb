@@ -7,17 +7,17 @@ skip_before_action :require_login
 
   end
 
-  def create
+    def create
 
-    @show = Show.find_by(:id => params[:show_id])
-    @comment = @show.comments.build(comment_params[:comment])
-    @comment.save
-    @comments = @show.comments
-      respond_to do |format|
-        format.html {render "/comments/index"}
-        format.json {render json: @comments.to_json(only: [:title, :body, :id])}
-      end
-  end
+      @show = Show.find_by(:id => params[:show_id])
+      @comment = @show.comments.build(comment_params[:comment])
+      @comment.save
+      @comments = @show.comments # I didn't do this
+        respond_to do |format|
+          format.html {render "/comments/index"}
+          format.json {render json: @comments.to_json(only: [:title, :body, :id])}
+        end
+    end
 
   def edit
     #use the access_permitted helper to determine if the current user can edit this comment

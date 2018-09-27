@@ -57,8 +57,8 @@ function addComment(){
 
     return response.json();})
     .then(function(commentData){
-      debugger;
-      alert(commentData[commentData.length - 1].title);
+      var ccc = new Comment(commentData[commentData.length - 1].title, commentData[commentData.length - 1].body, commentData[commentData.length - 1].id)
+      ccc.otherComments();
     })
   }
 //async function newaddComment(){
@@ -112,6 +112,14 @@ async function fetchComments(id){
   return jsonData;
 }
 
+async function fetchShow(id){
+  const url = `/shows/${id}.json`;
+  const fetchResult = fetch(url);
+  const response = await fetchResult;
+  const jsonData = await response.json();
+  return jsonData;
+}
+
 function getComments(){
   let show = document.querySelector("#get_comments") // used to get the show ID
     let myJson = fetchComments("#get_comments");
@@ -127,5 +135,25 @@ function getComments(){
 
       });
     })
+}
+function Show(title, watchlist, genre, type){
+  this.title = title;
+  this.watchlist = watchlist;
+  this.genre = genre;
+  this.type = type;
+}
 
+Show.prototype.upVote = function(){
+
+}
+
+function Comment(title, body, id){
+  this.title = title;
+  this.body = body;
+  this.id = id;
+}
+
+Comment.prototype.otherComments = function(){
+debugger;
+  alert(this.title + ' ' + this.body + ' ' + this.id);
 }

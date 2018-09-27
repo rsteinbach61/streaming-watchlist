@@ -45,6 +45,10 @@ class ShowsController < ApplicationController
       # use that details object to call the get_details method and return results to @details for use in shows/show view
       @details = details.get_details
     end
+    respond_to do |format|
+      format.html {render "/shows/show"}
+      format.json {render json: @show.to_json}
+    end
   end
 
   def index
