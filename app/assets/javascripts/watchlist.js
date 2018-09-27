@@ -143,8 +143,17 @@ function Show(title, watchlist, genre, type){
   this.type = type;
 }
 
-Show.prototype.upVote = function(){
+function vote(id){
+  let x = fetchShow(id);
+  x.then(function(s){
 
+    let currentShow = new Show(s.show_title, s.watchlist_id, s.genre, s.show_type);
+    currentShow.upVote();
+  })
+}
+
+Show.prototype.upVote = function(){
+  alert("up vote");
 }
 
 function Comment(title, body, id){
