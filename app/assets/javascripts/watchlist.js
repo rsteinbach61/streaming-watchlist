@@ -136,19 +136,20 @@ function getComments(){
       });
     })
 }
-function Show(id, title, watchlist, genre, type){
+function Show(id, title, watchlist, genre, type, vote){
   this.id = id;
   this.title = title;
   this.watchlist = watchlist;
   this.genre = genre;
   this.type = type;
+  this.vote = vote;
 }
 
 function vote(id){
   let x = fetchShow(id);
   x.then(function(s){
 
-    let currentShow = new Show(s.id, s.show_title, s.watchlist_id, s.genre, s.show_type);
+    let currentShow = new Show(s.id, s.show_title, s.watchlist_id, s.genre, s.show_type, s.vote);
     currentShow.upVote();
   })
 }
