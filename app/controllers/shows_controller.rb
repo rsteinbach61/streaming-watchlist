@@ -1,4 +1,5 @@
 class ShowsController < ApplicationController
+  skip_before_action :require_login
   before_action :set_show#, only: [:show, :edit, :update, :destroy]
   def new
     @show = Show.new
@@ -28,7 +29,10 @@ class ShowsController < ApplicationController
       redirect_to root_path, notice: 'Access denied'
     else
       if @show.update(show_params)
-        redirect_to show_path(@show), notice: 'Show updated.'
+        respond_to do |format|
+          format.html {redirect_to show_path(@show), notice: 'Show updated.'}
+          format.json {render json: @show.to_json}
+        end
       else
         render :edit
       end

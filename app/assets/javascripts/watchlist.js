@@ -162,7 +162,8 @@ Show.prototype.upVote = function(){
 }
 
 function postShow(obj){
-  fetch(`/shows/${obj.id}.json`,{
+  debugger;
+  fetch(`/shows/8.json`,{
     method: 'PATCH',
     body: JSON.stringify(obj),
     headers:{
