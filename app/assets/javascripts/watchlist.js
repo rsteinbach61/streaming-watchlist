@@ -136,7 +136,8 @@ function getComments(){
       });
     })
 }
-function Show(title, watchlist, genre, type){
+function Show(id, title, watchlist, genre, type){
+  this.id = id;
   this.title = title;
   this.watchlist = watchlist;
   this.genre = genre;
@@ -147,12 +148,13 @@ function vote(id){
   let x = fetchShow(id);
   x.then(function(s){
 
-    let currentShow = new Show(s.show_title, s.watchlist_id, s.genre, s.show_type);
+    let currentShow = new Show(s.id, s.show_title, s.watchlist_id, s.genre, s.show_type);
     currentShow.upVote();
   })
 }
 
 Show.prototype.upVote = function(){
+  debugger;
   alert(this.title);
 }
 
@@ -163,6 +165,6 @@ function Comment(title, body, id){
 }
 
 Comment.prototype.otherComments = function(){
-debugger;
+
   alert(this.title + ' ' + this.body + ' ' + this.id);
 }
