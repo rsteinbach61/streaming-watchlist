@@ -25,9 +25,9 @@ class ShowsController < ApplicationController
   end
 
   def update
-    unless access_permitted?
-      redirect_to root_path, notice: 'Access denied'
-    else
+    #unless access_permitted?
+      #redirect_to root_path, notice: 'Access denied'
+    #else
       if @show.update(show_params)
         respond_to do |format|
           format.html {redirect_to show_path(@show), notice: 'Show updated.'}
@@ -36,7 +36,7 @@ class ShowsController < ApplicationController
       else
         render :edit
       end
-    end
+    #end
   end
 
   def show

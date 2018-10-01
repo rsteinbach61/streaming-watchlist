@@ -155,21 +155,23 @@ function vote(id){
 }
 
 Show.prototype.upVote = function(){
+  //debugger;
   this.vote = (parseInt(this.vote) + 1).toString()
   let showData = postShow(this);
-  debugger;
+
   alert(this.title);
 }
 
 function postShow(obj){
-  debugger;
-  fetch(`/shows/8.json`,{
+
+  fetch(`/shows/${obj.id}.json`,{
     method: 'PATCH',
     body: JSON.stringify(obj),
     headers:{
       'Content-type': 'application/json'
     }
   }).then(function(response){
+
       return response.json();})
     .then(function(showData){
       return showData;
