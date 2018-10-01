@@ -4,7 +4,7 @@
 <h3> <%= @show.show_title %> <%= link_to 'edit', edit_show_path(@show) %></h3>
 <%= button_to "delete", @show, :method => :delete %><br>
 <p id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</p>
-<h2><span class="star" id="1">* </span><span class="star" id="2">* </span><span class="star" id="3">* </span><span class="star" id="4">* </span><span class="star" id="5">* </span></h2>
+<p id="votes">Votes: <%=@show.vote%></p>
 <h4> Comments: </h4>
 <h6><%= link_to 'Add a Comment', new_show_comment_path(@show)%></h6>
 
