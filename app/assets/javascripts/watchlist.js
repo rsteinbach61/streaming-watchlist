@@ -155,11 +155,9 @@ function vote(id){
 }
 
 Show.prototype.upVote = function(){
-  //debugger;
   this.vote = (parseInt(this.vote) + 1).toString()
-  let showData = postShow(this);
-
-  alert(this.title);
+  let showData = postShow(this); //update the db
+  document.getElementById("votes").innerHTML = `Votes: ${this.vote}`
 }
 
 function postShow(obj){
