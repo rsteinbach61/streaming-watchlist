@@ -45,7 +45,7 @@ function addComment(){
   var data = {title: `${title}`, body: `${cBody}`}
   //somehow get the show ID
   show = document.querySelector("#next_comment");
-
+debugger;
   fetch(`/shows/${show.dataset.show}/comments.json`,{
     method: 'POST',
     //credentials: "same-origin",
@@ -68,7 +68,7 @@ function addComment(){
   //var data = {title: `${title}`, body: `${cBody}`}
   //somehow get the show ID
   //let show = document.querySelector("#next_comment");
-  //onst settings = {
+  //const settings = {
     //method: 'POST',
     //headers: {
         //Accept: 'application/json',
@@ -146,6 +146,7 @@ function Show(id, title, watchlist, genre, type, vote){
 }
 
 function vote(id){
+  event.preventDefault();
   let x = fetchShow(id);
   x.then(function(s){
 
@@ -157,7 +158,7 @@ function vote(id){
 Show.prototype.upVote = function(){
   this.vote = (parseInt(this.vote) + 1).toString()
   let showData = postShow(this); //update the db
-  document.getElementById("votes").innerHTML = `Votes: ${this.vote}`
+  document.getElementById("votes").innerHTML = `Votes: ${this.vote}` //update vote count on show page.
 }
 
 function postShow(obj){

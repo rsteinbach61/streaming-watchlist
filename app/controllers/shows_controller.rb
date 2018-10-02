@@ -1,3 +1,4 @@
+require 'pry'
 class ShowsController < ApplicationController
   skip_before_action :require_login
   before_action :set_show#, only: [:show, :edit, :update, :destroy]
@@ -25,9 +26,13 @@ class ShowsController < ApplicationController
   end
 
   def update
-    #unless access_permitted?
-      #redirect_to root_path, notice: 'Access denied'
-    #else
+
+    unless params[:format] == "json"
+      unless access_permitted?
+
+        redirect_to root_path, notice: 'Access denied'
+      end
+    end
       if @show.update(show_params)
         respond_to do |format|
           format.html {redirect_to show_path(@show), notice: 'Show updated.'}
@@ -36,7 +41,6 @@ class ShowsController < ApplicationController
       else
         render :edit
       end
-    #end
   end
 
   def show
@@ -96,6 +100,6 @@ class ShowsController < ApplicationController
   end
 
   def show_params
-    params.require(:show).permit(:show_title, :watchlist_id, :show_type, :genre, :vote)
+    params.require(:show).permit(:id,:show_title, :watchlist_id, :show_type, :genre, :vote)
   end
 end
