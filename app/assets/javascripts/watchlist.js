@@ -147,23 +147,25 @@ function Show(id, title, watchlist, genre, type, vote){
 
 function vote(id){
   event.preventDefault();
-  let x = fetchShow(id);
-  x.then(function(s){
+  const show = fetchShow(id);
+  show.then(function(showData){
 
-    let currentShow = new Show(s.id, s.show_title, s.watchlist_id, s.genre, s.show_type, s.vote);
+    const currentShow = new Show(showData.id, showData.show_title, showData.watchlist_id, showData.genre, showData.show_type, showData.vote);
     currentShow.upVote();
   })
 }
 
 Show.prototype.upVote = function(){
   this.vote = (parseInt(this.vote) + 1).toString()
-  let showData = postShow(this); //update the db
-  document.getElementById("votes").innerHTML = `Votes: ${this.vote}` //update vote count on show page.
+  const showData = postShow(this); //update the db
+  showData.then(function(data){
+    document.getElementById("votes").innerHTML = `Votes: ${data.vote}` //update vote count on show page.
+  })
 }
 
 function postShow(obj){
 
-  fetch(`/shows/${obj.id}.json`,{
+  return fetch(`/shows/${obj.id}.json`,{
     method: 'PATCH',
     body: JSON.stringify(obj),
     headers:{
