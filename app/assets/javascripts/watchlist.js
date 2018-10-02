@@ -102,8 +102,8 @@ async function nextComment(){
     })
   }
 
-async function fetchComments(id){
-  const show = document.querySelector(id);
+async function fetchComments(commentsId){
+  const show = document.querySelector(commentsId);
   const url = `/shows/${show.dataset.show}/comments.json`;
   const fetchResult = fetch(url);
   const response = await fetchResult;
@@ -111,8 +111,8 @@ async function fetchComments(id){
   return jsonData;
 }
 
-async function fetchShow(id){
-  const url = `/shows/${id}.json`;
+async function fetchShow(showId){
+  const url = `/shows/${showId}.json`;
   const fetchResult = fetch(url);
   const response = await fetchResult;
   const jsonData = await response.json();
@@ -122,13 +122,13 @@ async function fetchShow(id){
 function getComments(){
   const show = document.querySelector("#get_comments") // used to get the show ID
     const myJson = fetchComments("#get_comments");
-      myJson.then(function(c){
-        c.forEach(function(c){
+      myJson.then(function(comment){
+        comment.forEach(function(comment){
         let li = document.createElement('li');
         let a = document.createElement('a');
-        let text = document.createTextNode(`${c.title}`);
+        let text = document.createTextNode(`${comment.title}`);
         a.appendChild(text);
-        a.setAttribute('href',`/shows/${show.dataset.show}/comments/${c.id}`);
+        a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.id}`);
         li.appendChild(a);
         document.getElementById('comments').appendChild(li);
 
