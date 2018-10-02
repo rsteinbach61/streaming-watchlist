@@ -11,19 +11,18 @@ function attachListeners(){
 
 function addCommentForm(){
 
-  let f = document.createElement("FORM");
+  const f = document.createElement("FORM");
   f.setAttribute("id", "dynamic_form");
   f.setAttribute("onSubmit", "addComment()")
   document.getElementById("form_div").appendChild(f);
-  //document.body.appendChild(f);
 
-  let title = document.createElement("INPUT");
+  const title = document.createElement("INPUT");
   title.setAttribute("type", "text");
   //title.setAttribute("name", "comment_title");
   title.setAttribute("id", "cTitle");
   document.getElementById("dynamic_form").appendChild(title);
 
-  let body = document.createElement("INPUT");
+  const body = document.createElement("INPUT");
   body.setAttribute("type", "textarea");
   //body.setAttribute("name", "comment_body");
   body.setAttribute("id", "cBody");
@@ -31,7 +30,7 @@ function addCommentForm(){
   body.setAttribute("cols", "25");
   document.getElementById("dynamic_form").appendChild(body);
 
-  let submit = document.createElement("INPUT");
+  const submit = document.createElement("INPUT");
   submit.setAttribute("type", "submit");
   //submit.setAttribute("value", "Submit");
   //submit.setAttribute("onclick", "test()");
@@ -40,12 +39,12 @@ function addCommentForm(){
 
 function addComment(){
   event.preventDefault();
-  var title = document.getElementById("cTitle").value
-  var cBody = document.getElementById("cBody").value
-  var data = {title: `${title}`, body: `${cBody}`}
+  const title = document.getElementById("cTitle").value
+  const cBody = document.getElementById("cBody").value
+  const data = {title: `${title}`, body: `${cBody}`}
   //somehow get the show ID
-  show = document.querySelector("#next_comment");
-debugger;
+  const show = document.querySelector("#next_comment");
+
   fetch(`/shows/${show.dataset.show}/comments.json`,{
     method: 'POST',
     //credentials: "same-origin",
@@ -57,7 +56,7 @@ debugger;
 
     return response.json();})
     .then(function(commentData){
-      var ccc = new Comment(commentData[commentData.length - 1].title, commentData[commentData.length - 1].body, commentData[commentData.length - 1].id)
+      const ccc = new Comment(commentData[commentData.length - 1].title, commentData[commentData.length - 1].body, commentData[commentData.length - 1].id)
       ccc.otherComments();
     })
   }
@@ -87,13 +86,13 @@ debugger;
 async function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
 
-    let myJson = fetchComments("#next_comment");
+    const myJson = fetchComments("#next_comment");
     myJson.then(function(nextComment){
 
       let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
 
       if (index < nextComment.length){
-        let newId = nextComment[index].id.toString();
+        const newId = nextComment[index].id.toString();
         document.getElementById("comment_title").innerHTML = nextComment[index].title;
         document.getElementById("comment_body").innerHTML = nextComment[index].body;
         document.getElementById('next_comment').setAttribute('data-comment', `${newId}`);
@@ -104,7 +103,7 @@ async function nextComment(){
   }
 
 async function fetchComments(id){
-  let show = document.querySelector(id);
+  const show = document.querySelector(id);
   const url = `/shows/${show.dataset.show}/comments.json`;
   const fetchResult = fetch(url);
   const response = await fetchResult;
