@@ -120,6 +120,7 @@ async function fetchShow(showId){
 }
 
 function getComments(){
+  document.getElementById('comments').innerHTML = "";
   const show = document.querySelector("#get_comments") // used to get the show ID
     const myJson = fetchComments("#get_comments");
       myJson.then(function(comment){
@@ -131,7 +132,6 @@ function getComments(){
         a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.id}`);
         li.appendChild(a);
         document.getElementById('comments').appendChild(li);
-
       });
     })
 }
