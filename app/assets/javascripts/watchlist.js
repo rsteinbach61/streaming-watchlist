@@ -121,8 +121,8 @@ async function fetchShow(id){
 }
 
 function getComments(){
-  let show = document.querySelector("#get_comments") // used to get the show ID
-    let myJson = fetchComments("#get_comments");
+  const show = document.querySelector("#get_comments") // used to get the show ID
+    const myJson = fetchComments("#get_comments");
       myJson.then(function(c){
         c.forEach(function(c){
         let li = document.createElement('li');
@@ -136,21 +136,20 @@ function getComments(){
       });
     })
 }
-function Show(id, title, watchlist, genre, type, vote){
-  this.id = id;
-  this.title = title;
-  this.watchlist = watchlist;
-  this.genre = genre;
-  this.type = type;
-  this.vote = vote;
+function Show(showData){
+  this.id = showData.id;
+  this.title = showData.show_title;
+  this.watchlist = showData.watchlist_id;
+  this.genre = showData.genre;
+  this.type = showData.show_type;
+  this.vote = showData.vote;
 }
 
 function vote(id){
   event.preventDefault();
   const show = fetchShow(id);
   show.then(function(showData){
-
-    const currentShow = new Show(showData.id, showData.show_title, showData.watchlist_id, showData.genre, showData.show_type, showData.vote);
+    const currentShow = new Show(showData)
     currentShow.upVote();
   })
 }
