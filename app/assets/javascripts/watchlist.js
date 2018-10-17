@@ -115,22 +115,9 @@ Show.prototype.upVote = function(){
     document.getElementById("votes").innerHTML = `Votes: ${data.vote}` //update vote count on show page.
   })
 }
-//update the db with edits to show
-function postShow(obj){
 
-  return fetch(`/shows/${obj.id}.json`,{
-            method: 'PATCH',
-            body: JSON.stringify(obj),
-            headers:{
-              'Content-type': 'application/json'
-            }
-          }).then(function(response){
-              return response.json();})
-              .then(function(showData){
-              return showData;
-            })
-}
 
+//Comment object constructor
 function Comment(title, body, id){
   this.title = title;
   this.body = body;
@@ -158,4 +145,20 @@ async function fetchShow(showId){
   const response = await fetchResult;
   const jsonData = await response.json();
   return jsonData;
+}
+
+//update the db with edits to show
+function postShow(obj){
+
+  return fetch(`/shows/${obj.id}.json`,{
+            method: 'PATCH',
+            body: JSON.stringify(obj),
+            headers:{
+              'Content-type': 'application/json'
+            }
+          }).then(function(response){
+              return response.json();})
+              .then(function(showData){
+              return showData;
+            })
 }
