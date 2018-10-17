@@ -1,13 +1,5 @@
 
 
-$(document).ready(function() {
-  attachListeners()
-});
-
-function attachListeners(){
-//document.getElementById("add_comment").onclick = function(){addComment()};
-
-}
 
 function addCommentForm(){
 
@@ -118,7 +110,7 @@ async function fetchShow(showId){
   const jsonData = await response.json();
   return jsonData;
 }
-
+//---------------------- requirement 1 ----------------------
 function getComments(){
   document.getElementById('comments').innerHTML = "";
   const show = document.querySelector("#get_comments") // used to get the show ID
@@ -135,6 +127,7 @@ function getComments(){
       });
     })
 }
+// Object constructor
 function Show(showData){
   this.id = showData.id;
   this.title = showData.show_title;
@@ -152,7 +145,7 @@ function vote(id){
     currentShow.upVote();
   })
 }
-
+//object prototype
 Show.prototype.upVote = function(){
   this.vote = (parseInt(this.vote) + 1).toString()
   const showData = postShow(this); //update the db
@@ -160,21 +153,20 @@ Show.prototype.upVote = function(){
     document.getElementById("votes").innerHTML = `Votes: ${data.vote}` //update vote count on show page.
   })
 }
-
+//update the db with edits to show
 function postShow(obj){
 
   return fetch(`/shows/${obj.id}.json`,{
-    method: 'PATCH',
-    body: JSON.stringify(obj),
-    headers:{
-      'Content-type': 'application/json'
-    }
-  }).then(function(response){
-
-      return response.json();})
-    .then(function(showData){
-      return showData;
-    })
+            method: 'PATCH',
+            body: JSON.stringify(obj),
+            headers:{
+              'Content-type': 'application/json'
+            }
+          }).then(function(response){
+              return response.json();})
+              .then(function(showData){
+              return showData;
+            })
 }
 
 function Comment(title, body, id){
