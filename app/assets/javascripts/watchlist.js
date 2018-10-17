@@ -1,5 +1,22 @@
 
-
+//---------------------- requirement 1 ----------------------
+function getComments(){
+  document.getElementById('comments').innerHTML = "";
+  const show = document.querySelector("#get_comments") // used to get the show ID
+    const myJson = fetchComments("#get_comments");
+      myJson.then(function(comment){
+        comment.forEach(function(comment){
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        let text = document.createTextNode(`${comment.title}`);
+        a.appendChild(text);
+        a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.id}`);
+        li.appendChild(a);
+        document.getElementById('comments').appendChild(li);
+      });
+    })
+}
+//---------------------- requirement 4 ----------------------
 
 function addCommentForm(){
 
@@ -10,13 +27,11 @@ function addCommentForm(){
 
   const title = document.createElement("INPUT");
   title.setAttribute("type", "text");
-  //title.setAttribute("name", "comment_title");
   title.setAttribute("id", "cTitle");
   document.getElementById("dynamic_form").appendChild(title);
 
   const body = document.createElement("INPUT");
   body.setAttribute("type", "textarea");
-  //body.setAttribute("name", "comment_body");
   body.setAttribute("id", "cBody");
   body.setAttribute("rows", "10");
   body.setAttribute("cols", "25");
@@ -24,8 +39,6 @@ function addCommentForm(){
 
   const submit = document.createElement("INPUT");
   submit.setAttribute("type", "submit");
-  //submit.setAttribute("value", "Submit");
-  //submit.setAttribute("onclick", "test()");
   document.getElementById("dynamic_form").appendChild(submit);
 }
 
@@ -52,28 +65,7 @@ function addComment(){
       ccc.otherComments();
     })
   }
-//async function newaddComment(){
-  //event.preventDefault();
-  //var title = document.getElementById("cTitle").value
-  //var cBody = document.getElementById("cBody").value
-  //var data = {title: `${title}`, body: `${cBody}`}
-  //somehow get the show ID
-  //let show = document.querySelector("#next_comment");
-  //const settings = {
-    //method: 'POST',
-    //headers: {
-        //Accept: 'application/json',
-        //'Content-Type': 'application/json',
-    //}
-  //};
 
-  //const fetchResult = await fetch(`/shows/${show.dataset.show}/comments.json`, settings);
-  //.then(response => response.json())
-  //.then(json => { return json;});
-  //const response = await fetchResult;
-  //const commentJson = await response.json();
-  //alert(commentJson);
-//}
 
 function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
@@ -110,23 +102,7 @@ async function fetchShow(showId){
   const jsonData = await response.json();
   return jsonData;
 }
-//---------------------- requirement 1 ----------------------
-function getComments(){
-  document.getElementById('comments').innerHTML = "";
-  const show = document.querySelector("#get_comments") // used to get the show ID
-    const myJson = fetchComments("#get_comments");
-      myJson.then(function(comment){
-        comment.forEach(function(comment){
-        let li = document.createElement('li');
-        let a = document.createElement('a');
-        let text = document.createTextNode(`${comment.title}`);
-        a.appendChild(text);
-        a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.id}`);
-        li.appendChild(a);
-        document.getElementById('comments').appendChild(li);
-      });
-    })
-}
+
 // Show Object constructor
 function Show(showData){
   this.id = showData.id;
