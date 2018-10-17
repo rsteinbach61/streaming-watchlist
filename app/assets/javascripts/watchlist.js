@@ -3,7 +3,7 @@
 function getComments(){
   document.getElementById('comments').innerHTML = "";
   const show = document.querySelector("#get_comments") // used to get the show ID
-    const myJson = fetchComments("#get_comments");
+    const myJson = fetchComments("#get_comments"); //calls fetch function with ID
       myJson.then(function(comment){
         comment.forEach(function(comment){
         let li = document.createElement('li');
@@ -129,8 +129,8 @@ Comment.prototype.otherComments = function(){
 
 // ---------------------- fetch functions ----------------------
 async function fetchComments(commentsId){
-  const show = document.querySelector(commentsId);
-  const url = `/shows/${show.dataset.show}/comments.json`;
+  const show = document.querySelector(commentsId); //
+  const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch
   const fetchResult = fetch(url);
   const response = await fetchResult;
   const jsonData = await response.json();
