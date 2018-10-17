@@ -75,7 +75,7 @@ function addComment(){
   //alert(commentJson);
 //}
 
-async function nextComment(){
+function nextComment(){
   let show = document.querySelector("#next_comment") // used to get the comment ID
 
     const myJson = fetchComments("#next_comment");
@@ -93,7 +93,7 @@ async function nextComment(){
       }
     })
   }
-
+// ---------------------- fetch functions ----------------------
 async function fetchComments(commentsId){
   const show = document.querySelector(commentsId);
   const url = `/shows/${show.dataset.show}/comments.json`;
@@ -127,7 +127,7 @@ function getComments(){
       });
     })
 }
-// Object constructor
+// Show Object constructor
 function Show(showData){
   this.id = showData.id;
   this.title = showData.show_title;
@@ -136,7 +136,7 @@ function Show(showData){
   this.type = showData.show_type;
   this.vote = showData.vote;
 }
-
+//called from show view, kicks off upvote process
 function vote(id){
   event.preventDefault();
   const show = fetchShow(id);
