@@ -1,5 +1,5 @@
 
-//---------------------- requirement 1 ----------------------
+//---------------------- requirement 1 & 3 ----------------------
 function getComments(){
   document.getElementById('comments').innerHTML = "";
   const show = document.querySelector("#get_comments") // used to get the show ID
@@ -16,6 +16,26 @@ function getComments(){
       });
     })
 }
+
+//---------------------- requirement 2 ----------------------
+function nextComment(){
+  let show = document.querySelector("#next_comment") // used to get the comment ID
+
+    const myJson = fetchComments("#next_comment");
+    myJson.then(function(nextComment){
+
+      let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
+
+      if (index < nextComment.length){
+        const newId = nextComment[index].id.toString();
+        document.getElementById("comment_title").innerHTML = nextComment[index].title;
+        document.getElementById("comment_body").innerHTML = nextComment[index].body;
+        document.getElementById('next_comment').setAttribute('data-comment', `${newId}`);
+      } else {
+        alert("That's the last comment!");
+      }
+    })
+  }
 //---------------------- requirement 4 ----------------------
 
 function addCommentForm(){
@@ -67,42 +87,8 @@ function addComment(){
   }
 
 
-function nextComment(){
-  let show = document.querySelector("#next_comment") // used to get the comment ID
 
-    const myJson = fetchComments("#next_comment");
-    myJson.then(function(nextComment){
-
-      let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
-
-      if (index < nextComment.length){
-        const newId = nextComment[index].id.toString();
-        document.getElementById("comment_title").innerHTML = nextComment[index].title;
-        document.getElementById("comment_body").innerHTML = nextComment[index].body;
-        document.getElementById('next_comment').setAttribute('data-comment', `${newId}`);
-      } else {
-        alert("That's the last comment!");
-      }
-    })
-  }
-// ---------------------- fetch functions ----------------------
-async function fetchComments(commentsId){
-  const show = document.querySelector(commentsId);
-  const url = `/shows/${show.dataset.show}/comments.json`;
-  const fetchResult = fetch(url);
-  const response = await fetchResult;
-  const jsonData = await response.json();
-  return jsonData;
-}
-
-async function fetchShow(showId){
-  const url = `/shows/${showId}.json`;
-  const fetchResult = fetch(url);
-  const response = await fetchResult;
-  const jsonData = await response.json();
-  return jsonData;
-}
-
+//---------------------- requirement 5 ----------------------
 // Show Object constructor
 function Show(showData){
   this.id = showData.id;
@@ -154,4 +140,22 @@ function Comment(title, body, id){
 Comment.prototype.otherComments = function(){
 
   alert(this.title + ' ' + this.body + ' ' + this.id);
+}
+
+// ---------------------- fetch functions ----------------------
+async function fetchComments(commentsId){
+  const show = document.querySelector(commentsId);
+  const url = `/shows/${show.dataset.show}/comments.json`;
+  const fetchResult = fetch(url);
+  const response = await fetchResult;
+  const jsonData = await response.json();
+  return jsonData;
+}
+
+async function fetchShow(showId){
+  const url = `/shows/${showId}.json`;
+  const fetchResult = fetch(url);
+  const response = await fetchResult;
+  const jsonData = await response.json();
+  return jsonData;
 }
