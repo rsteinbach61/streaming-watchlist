@@ -1,16 +1,18 @@
 
 
 
-<h3> <%= @show.show_title %> <%= link_to 'edit', edit_show_path(@show) %></h3>
+<h3> <%= @show.show_title %> </h3>
+<div id="buttons">
+<%= button_to 'edit', edit_show_path(@show) %>
 <%= button_to "delete", @show, :method => :delete %><br>
 <button id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</button>
+<%= button_to 'Add a Comment', new_show_comment_path(@show)%>
+<button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
 <p id="votes">Votes: <%=@show.vote%></p>
 <h4> Comments: </h4>
-<h6><%= link_to 'Add a Comment', new_show_comment_path(@show)%></h6>
 
-<button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
 <ul id="comments"></ul>
-
+</div>
 <h4> Show Details from OMDB </h4>
 <% if @details["Response"] == "False" %>
     <p><%= @details["Error"] %></p>
