@@ -8,11 +8,13 @@
 <button id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</button>
 <%= button_to 'Add a Comment', new_show_comment_path(@show)%>
 <button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
+</div>
 <p id="votes">Votes: <%=@show.vote%></p>
+
 <h4> Comments: </h4>
 
 <ul id="comments"></ul>
-</div>
+
 <h4> Show Details from OMDB </h4>
 <% if @details["Response"] == "False" %>
     <p><%= @details["Error"] %></p>
