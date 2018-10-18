@@ -3,7 +3,7 @@
 
 <h3> <%= @show.show_title %> </h3>
 <div class="buttons">
-<%= button_to 'edit', edit_show_path(@show) %>
+<%= button_to 'edit', @show, :method => :patch %>
 <%= button_to "delete", @show, :method => :delete %>
 <button id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</button>
 <%= button_to 'Add a Comment', new_show_comment_path(@show)%>
