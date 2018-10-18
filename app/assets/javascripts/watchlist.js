@@ -43,7 +43,7 @@ function addCommentForm(){
   const f = document.createElement("FORM");
   f.setAttribute("id", "dynamic_form");
   f.setAttribute("onSubmit", "addComment()")
-  document.getElementById("form_div").appendChild(f);
+  document.getElementsByClassName("form_div")[0].appendChild(f);
 
   const title = document.createElement("INPUT");
   title.setAttribute("type", "text");

@@ -6,7 +6,7 @@
 <%= button_to 'edit', @show, :method => :patch %>
 <%= button_to "delete", @show, :method => :delete %>
 <button id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</button>
-<%= button_to 'Add a Comment', new_show_comment_path(@show)%>
+<button id="add_comment" onclick="addCommentForm()">Add Comment</button>
 <button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
 </div>
 <p id="votes">Votes: <%=@show.vote%></p>
