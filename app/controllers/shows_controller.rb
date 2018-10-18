@@ -26,7 +26,6 @@ class ShowsController < ApplicationController
   end
 
   def update
-
     unless params[:format] == "json"
       unless access_permitted?
 

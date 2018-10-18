@@ -3,16 +3,16 @@
 
 <h3> <%= @show.show_title %> </h3>
 <div class="buttons">
-<%= button_to 'edit', @show, :method => :patch %>
-<%= button_to "delete", @show, :method => :delete %>
 <button id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</button>
 <button id="add_comment" onclick="addCommentForm()">Add Comment</button>
 <button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
+<%= button_to 'Edit', edit_show_path(@show), :method => :get %>
+<%= button_to "Delete", @show, :method => :delete %>
 </div>
 <p id="votes">Votes: <%=@show.vote%></p>
 
 <h4> Comments: </h4>
-
+<div class="form_div"></div>
 <ul id="comments"></ul>
 
 <h4> Show Details from OMDB </h4>
