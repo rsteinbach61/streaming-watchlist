@@ -130,7 +130,7 @@ Comment.prototype.otherComments = function(){
 // ---------------------- fetch functions ----------------------
 async function fetchComments(commentsId){
   const show = document.querySelector(commentsId); //
-  const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch
+  const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch using the ID from show
   const fetchResult = fetch(url);
   const response = await fetchResult;
   const jsonData = await response.json();
