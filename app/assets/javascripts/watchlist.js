@@ -114,6 +114,10 @@ function vote(id){
     const currentShow = new Show(showData)
     currentShow.upVote();
   })
+      .catch(function(error){
+        let e = "vote Error";
+        alert(e);
+      })
 }
 
 //Comment object constructor
@@ -138,11 +142,18 @@ async function fetchComments(commentsId){
 }
 
 async function fetchShow(showId){
-  const url = `/shows/${showId}.json`;
-  const fetchResult = fetch(url);
-  const response = await fetchResult;
-  const jsonData = await response.json();
+  //const url = `/shows/${showId}.json`;
+  const url = `/bogus/${showId}.json`;
+  try {
+    const fetchResult = fetch(url);
+    const response = await fetchResult;
+    const jsonData = await response.json();
+  } catch(error) {
+    let e = "fetchShow Error";
+    alert(e);
+  }
   return jsonData;
+  //return json;
 }
 
 //update the db with edits to show
