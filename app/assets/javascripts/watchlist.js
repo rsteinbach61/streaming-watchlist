@@ -114,7 +114,7 @@ function vote(id){
     const currentShow = new Show(showData)
     currentShow.upVote();
   })
-      .catch(function(error){
+      .catch(function(error){ //SHOULD IT GO HERE OR BELOW IN fetchShow?
         let e = "vote Error";
         alert(e);
       })
@@ -135,9 +135,14 @@ Comment.prototype.otherComments = function(){
 async function fetchComments(commentsId){
   const show = document.querySelector(commentsId); //
   const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch using the ID from show
+  try {
   const fetchResult = fetch(url);
   const response = await fetchResult;
   const jsonData = await response.json();
+} catch(error){
+  let e = "fetchComments Error";
+  alert(e);
+}
   return jsonData;
 }
 
@@ -149,8 +154,9 @@ async function fetchShow(showId){
     const response = await fetchResult;
     const jsonData = await response.json();
   } catch(error) {
+    debugger;
     let e = "fetchShow Error";
-    alert(e);
+    alert(error.status);
   }
   return jsonData;
   //return json;
