@@ -4,7 +4,7 @@
 <h3> <%= @show.show_title %> </h3>
 <div class="buttons">
 <button id="up_vote" onclick="vote(<%=@show.id%>)">Up Vote</button>
-<button id="add_comment" onclick="addCommentForm()">Add Comment</button>
+<button class="add_comment", data-show="<%=@show.id%>"  onclick="addCommentForm()">Add Comment</button>
 <button id="get_comments", data-show="<%=@show.id%>" onclick="getComments()">Get Comments</button>
 <%= button_to 'Edit', edit_show_path(@show), :method => :get %>
 <%= button_to "Delete", @show, :method => :delete %>

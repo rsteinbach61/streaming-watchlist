@@ -39,10 +39,11 @@ function nextComment(){
 //---------------------- requirement 4 ----------------------
 
 function addCommentForm(){
-
+  const show = document.getElementsByClassName("add_comment")[0];
   const f = document.createElement("FORM");
   f.setAttribute("id", "dynamic_form");
-  f.setAttribute("onSubmit", "addComment()")
+  f.setAttribute("onSubmit", "addComment()");
+  f.setAttribute("data-show", `${show.dataset.show}`);
   document.getElementsByClassName("form_div")[0].appendChild(f);
 
   const title = document.createElement("INPUT");
@@ -68,7 +69,7 @@ function addComment(){
   const cBody = document.getElementById("cBody").value
   const data = {title: `${title}`, body: `${cBody}`}
   //somehow get the show ID
-  const show = document.querySelector("#next_comment");
+  const show = document.querySelector(".add_comment");
 
   fetch(`/shows/${show.dataset.show}/comments.json`,{
     method: 'POST',
@@ -135,29 +136,29 @@ Comment.prototype.otherComments = function(){
 async function fetchComments(commentsId){
   const show = document.querySelector(commentsId); //
   const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch using the ID from show
-  try {
+
+  //try {
   const fetchResult = fetch(url);
   const response = await fetchResult;
   const jsonData = await response.json();
-} catch(error){
-  let e = "fetchComments Error";
-  alert(e);
-}
+//} catch(error){
+//  let e = "fetchComments Error";
+//  alert(e);
+//}
   return jsonData;
 }
 
 async function fetchShow(showId){
-  //const url = `/shows/${showId}.json`;
-  const url = `/bogus/${showId}.json`;
-  try {
+  const url = `/shows/${showId}.json`;
+  //const url = `/bogus/${showId}.json`;
+  //try {
     const fetchResult = fetch(url);
     const response = await fetchResult;
     const jsonData = await response.json();
-  } catch(error) {
-    debugger;
-    let e = "fetchShow Error";
-    alert(error.status);
-  }
+  //} catch(error) {
+  //  let e = "fetchShow Error";
+  //  alert(e);
+  //}
   return jsonData;
   //return json;
 }

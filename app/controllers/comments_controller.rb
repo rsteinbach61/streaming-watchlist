@@ -51,6 +51,8 @@ skip_before_action :require_login
     unless access_permitted?
       redirect_to root_path, notice: 'Access denied'
     else
+
+      @show = Show.find_by(:id => params[:show_id])
       @comment = Comment.find_by(:id => params[:id])
         respond_to do |format|
           format.html {render "/comments/show"}

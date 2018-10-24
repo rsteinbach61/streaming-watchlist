@@ -4,6 +4,6 @@
 <p id="comment_body"><%= @comment.body %></p>
 <%= link_to "edit", edit_show_comment_path(@comment.show_id, @comment) %><br>
 <button id="next_comment", data-comment="<%=@comment.id%>" data-show="<%=@comment.show_id%>" onclick="nextComment()">Next</button>
-<button id="add_comment" onclick="addCommentForm()">Add Comment</button>
+<button class="add_comment", data-comment="<%=@comment.id%>", data-show="<%=@show.id%>" onclick="addCommentForm()">Add Comment</button>
 </div><br>
 <div class="form_div" class="flex-container"></div>
