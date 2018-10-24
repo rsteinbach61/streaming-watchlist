@@ -56,7 +56,7 @@ skip_before_action :require_login
       @comment = Comment.find_by(:id => params[:id])
         respond_to do |format|
           format.html {render "/comments/show"}
-          format.json {render json: @comment.to_json(only: [:title, :body, :id])}
+          format.json {render json: @comment} #.to_json(only: [:title, :body, :id])}
         end
 
     end

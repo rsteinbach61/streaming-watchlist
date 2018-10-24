@@ -82,6 +82,7 @@ function addComment(){
 
     return response.json();})
     .then(function(commentData){
+      debugger;
       const ccc = new Comment(commentData[commentData.length - 1].title, commentData[commentData.length - 1].body, commentData[commentData.length - 1].id)
       ccc.otherComments();
     })
@@ -129,6 +130,7 @@ function Comment(title, body, id){
 }
 //Comment object protoype
 Comment.prototype.otherComments = function(){
+
   alert(this.title + ' ' + this.body + ' ' + this.id);
 }
 
