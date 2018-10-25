@@ -1,11 +1,14 @@
 
 //---------------------- requirement 1 & 3 ----------------------
+//comment.data.relationships.comments.data
 function getComments(){
   document.getElementById('comments').innerHTML = "";
   const show = document.querySelector("#get_comments") // used to get the show ID
-    const myJson = fetchComments("#get_comments"); //calls fetch function with ID
+    const myJson = fetchShow(show.dataset.show); //calls fetch function with ID
       myJson.then(function(comment){
-        comment.forEach(function(comment){
+
+        comment.data.relationships.comments.data.forEach(function(comment){
+            debugger;
         let li = document.createElement('li');
         let a = document.createElement('a');
         let text = document.createTextNode(`${comment.title}`);
@@ -67,7 +70,8 @@ function addComment(){
   event.preventDefault();
   const title = document.getElementById("cTitle").value
   const cBody = document.getElementById("cBody").value
-  const data = {title: `${title}`, body: `${cBody}`}
+  const showId = document.getElementById("dynamic_form")
+  const data = {title: `${title}`, body: `${cBody}`, show_id: `${showId.dataset.show}`}
   //somehow get the show ID
   const show = document.querySelector(".add_comment");
 
@@ -82,11 +86,12 @@ function addComment(){
 
     return response.json();})
     .then(function(commentData){
-      debugger;
-      const ccc = new Comment(commentData[commentData.length - 1].title, commentData[commentData.length - 1].body, commentData[commentData.length - 1].id)
-      ccc.otherComments();
+      const ccc = new Comment(commentData.data[commentData.data.length - 1].attributes.title, commentData.data[commentData.data.length - 1].attributes.body, commentData.data[commentData.data.length - 1].id, commentData.data[commentData.data.length - 1].attributes["show-id"])
+      ccc.allComments();
     })
   }
+//commentData.data.forEach(function(comment){
+//console.log(comment.attributes.title);})
 
 //---------------------- requirement 5 ----------------------
 // Show Object constructor
@@ -113,7 +118,12 @@ function vote(id){
   event.preventDefault();
   const show = fetchShow(id);
   show.then(function(showData){
-    const currentShow = new Show(showData)
+    const currentShow = new Show(showData.data)
+    currentShow.title = showData.data.attributes["show-title"];
+    currentShow.type = showData.data.attributes["show-type"];
+    currentShow.genre = showData.data.attributes["genre"];
+    currentShow.watchlist = showData.data.attributes["watchlist-id"];
+    currentShow.vote = showData.data.attributes["vote"];
     currentShow.upVote();
   })
       .catch(function(error){ //SHOULD IT GO HERE OR BELOW IN fetchShow?
@@ -123,21 +133,30 @@ function vote(id){
 }
 
 //Comment object constructor
-function Comment(title, body, id){
+function Comment(title, body, id, show_id){
   this.title = title;
   this.body = body;
   this.id = id;
+  this.show_id = show_id;
 }
 //Comment object protoype
 Comment.prototype.otherComments = function(){
 
-  alert(this.title + ' ' + this.body + ' ' + this.id);
+  alert(this.title + ' ' + this.body + ' ' + this.id + ' ' + this.show_id);
 }
-
+Comment.prototype.allComments = function(){
+    //debugger;
+  const show = fetchShow(this.show_id);
+  show.then(function(data){
+    debugger;
+    console.log(data.comments)
+  })
+  //debugger;
+}
 // ---------------------- fetch functions ----------------------
-async function fetchComments(commentsId){
+async function fetchComment(commentsId){
   const show = document.querySelector(commentsId); //
-  const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch using the ID from show
+  const url = `/shows/${show.dataset.show}.json`; //sets the url for fetch using the ID from show
 
   //try {
   const fetchResult = fetch(url);

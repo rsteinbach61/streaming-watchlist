@@ -56,7 +56,7 @@ class ShowsController < ApplicationController
     respond_to do |format|
 
       format.html {render "/shows/show"}
-      format.json {render json: @show.to_json}
+      format.json {render json: @show}
     end
   end
 

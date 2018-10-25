@@ -15,7 +15,7 @@ skip_before_action :require_login
       @comments = @show.comments # I didn't do this
         respond_to do |format|
           format.html {render "/comments/index"}
-          format.json {render json: @comments.to_json(only: [:title, :body, :id])}
+          format.json {render json: @comments} #.to_json(only: [:title, :body, :id])}
         end
     end
 
@@ -54,9 +54,10 @@ skip_before_action :require_login
 
       @show = Show.find_by(:id => params[:show_id])
       @comment = Comment.find_by(:id => params[:id])
+
         respond_to do |format|
           format.html {render "/comments/show"}
-          format.json {render json: @comment} #.to_json(only: [:title, :body, :id])}
+          format.json {render json: @show} #.to_json(only: [:title, :body, :id])}
         end
 
     end
@@ -66,9 +67,10 @@ skip_before_action :require_login
     if logged_in?
       @show = Show.find_by(:id => params[:show_id])
       @comments = @show.comments
+      binding.pry
       respond_to do |format|
         format.html {render "/comments/index"}
-        format.json {render json: @comments.to_json(only: [:title, :body, :id])}
+        format.json {render json: @comments} #.to_json(only: [:title, :body, :id])}
       end
     end
   end
