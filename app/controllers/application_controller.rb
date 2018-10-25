@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   def access_permitted?
+
     if params[:controller] == 'watchlists'
       watchlist = Watchlist.find(params[:id])
       current_user.id == watchlist.user_id

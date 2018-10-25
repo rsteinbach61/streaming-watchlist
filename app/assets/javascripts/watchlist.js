@@ -6,18 +6,30 @@ function getComments(){
   const show = document.querySelector("#get_comments") // used to get the show ID
     const myJson = fetchShow(show.dataset.show); //calls fetch function with ID
       myJson.then(function(comment){
-
         comment.data.relationships.comments.data.forEach(function(comment){
-            debugger;
-        let li = document.createElement('li');
-        let a = document.createElement('a');
-        let text = document.createTextNode(`${comment.title}`);
-        a.appendChild(text);
-        a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.id}`);
-        li.appendChild(a);
-        document.getElementById('comments').appendChild(li);
+          let ccc = fetchComment(comment.id, show.dataset.show);
+          ccc.then(function(c){
+              listComments(c);
+          })
+
+        })
       });
-    })
+
+}
+
+function listComments(comment){
+
+  const show = document.querySelector("#get_comments") // used to get the show ID
+  //comment.then(function(comment){
+//debugger;
+    let li = document.createElement('li');
+    let a = document.createElement('a');
+    let text = document.createTextNode(`${comment.data.attributes.title}`);
+    a.appendChild(text);
+    a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.data.id}`);
+    li.appendChild(a);
+    document.getElementById('comments').appendChild(li);
+//})
 }
 
 //---------------------- requirement 2 ----------------------
@@ -154,9 +166,9 @@ Comment.prototype.allComments = function(){
   //debugger;
 }
 // ---------------------- fetch functions ----------------------
-async function fetchComment(commentsId){
-  const show = document.querySelector(commentsId); //
-  const url = `/shows/${show.dataset.show}.json`; //sets the url for fetch using the ID from show
+async function fetchComment(commentsId, showId){
+  //const show = document.querySelector(commentsId); //
+  const url = `/shows/${showId}/comments/${commentsId}.json`; //sets the url for fetch using the ID from show
 
   //try {
   const fetchResult = fetch(url);
@@ -166,6 +178,7 @@ async function fetchComment(commentsId){
 //  let e = "fetchComments Error";
 //  alert(e);
 //}
+
   return jsonData;
 }
 

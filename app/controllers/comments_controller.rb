@@ -57,7 +57,7 @@ skip_before_action :require_login
 
         respond_to do |format|
           format.html {render "/comments/show"}
-          format.json {render json: @show} #.to_json(only: [:title, :body, :id])}
+          format.json {render json: @comment} #.to_json(only: [:title, :body, :id])}
         end
 
     end
