@@ -14,7 +14,6 @@ function getComments(){
 
         })
       });
-
 }
 
 function listComments(comment){
@@ -39,12 +38,11 @@ function nextComment(){
     const myJson = fetchComments("#next_comment");
     myJson.then(function(nextComment){
 
-      let index = nextComment.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
-
-      if (index < nextComment.length){
-        const newId = nextComment[index].id.toString();
-        document.getElementById("comment_title").innerHTML = nextComment[index].title;
-        document.getElementById("comment_body").innerHTML = nextComment[index].body;
+      let index = nextComment.data.findIndex(key => key.id.toString() == show.dataset.comment) + 1; //looks for the index of the pair that matches the comments id
+      if (index < nextComment.data.length){
+        const newId = nextComment.data[index].id.toString();
+        document.getElementById("comment_title").innerHTML = nextComment.data[index].attributes.title;
+        document.getElementById("comment_body").innerHTML = nextComment.data[index].attributes.body;
         document.getElementById('next_comment').setAttribute('data-comment', `${newId}`);
       } else {
         alert("That's the last comment!");
@@ -99,7 +97,7 @@ function addComment(){
     return response.json();})
     .then(function(commentData){
       const ccc = new Comment(commentData.data[commentData.data.length - 1].attributes.title, commentData.data[commentData.data.length - 1].attributes.body, commentData.data[commentData.data.length - 1].id, commentData.data[commentData.data.length - 1].attributes["show-id"])
-      ccc.allComments();
+      ccc.otherComments();
     })
   }
 //commentData.data.forEach(function(comment){
@@ -157,13 +155,13 @@ Comment.prototype.otherComments = function(){
   alert(this.title + ' ' + this.body + ' ' + this.id + ' ' + this.show_id);
 }
 Comment.prototype.allComments = function(){
-    //debugger;
+
   const show = fetchShow(this.show_id);
   show.then(function(data){
-    debugger;
+
     console.log(data.comments)
   })
-  //debugger;
+
 }
 // ---------------------- fetch functions ----------------------
 async function fetchComment(commentsId, showId){
@@ -181,7 +179,21 @@ async function fetchComment(commentsId, showId){
 
   return jsonData;
 }
+async function fetchComments(commentsId){
+  const show = document.querySelector(commentsId); //
+  const url = `/shows/${show.dataset.show}/comments.json`; //sets the url for fetch using the ID from show
 
+  //try {
+  const fetchResult = fetch(url);
+  const response = await fetchResult;
+  const jsonData = await response.json();
+//} catch(error){
+//  let e = "fetchComments Error";
+//  alert(e);
+//}
+
+  return jsonData;
+}
 async function fetchShow(showId){
   const url = `/shows/${showId}.json`;
   //const url = `/bogus/${showId}.json`;

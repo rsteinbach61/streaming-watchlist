@@ -67,7 +67,7 @@ skip_before_action :require_login
     if logged_in?
       @show = Show.find_by(:id => params[:show_id])
       @comments = @show.comments
-      binding.pry
+    
       respond_to do |format|
         format.html {render "/comments/index"}
         format.json {render json: @comments} #.to_json(only: [:title, :body, :id])}
