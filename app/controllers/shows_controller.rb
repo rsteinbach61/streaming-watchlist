@@ -54,9 +54,8 @@ class ShowsController < ApplicationController
       @details = details.get_details
     end
     respond_to do |format|
-
       format.html {render "/shows/show"}
-      format.json {render json: @show}
+      format.json {render json: @show, include: 'comments'}
     end
   end
 
