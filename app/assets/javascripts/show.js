@@ -1,5 +1,4 @@
 
-
 //---------------------- requirement 5 ----------------------
 // Show Object constructor
 function Show(showData){
@@ -39,7 +38,6 @@ function vote(id){
       })
 }
 
-
 // ---------------------- fetch functions ----------------------
 
 async function fetchShow(showId){
@@ -59,7 +57,6 @@ async function fetchShow(showId){
 
 //update the db with edits to show
 function postShow(obj){
-
   return fetch(`/shows/${obj.id}.json`,{
             method: 'PATCH',
             body: JSON.stringify(obj),
