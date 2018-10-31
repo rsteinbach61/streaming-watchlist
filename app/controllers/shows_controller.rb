@@ -61,6 +61,10 @@ class ShowsController < ApplicationController
 
   def index
     @shows = current_user.shows
+    respond_to do |format|
+      format.html {render "/shows"}
+      format.json {render json: @shows}
+    end
   end
 
 

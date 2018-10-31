@@ -5,29 +5,21 @@ function getComments(){
   const show = document.querySelector("#get_comments") // used to get the show ID
     const myJson = fetchShow(show.dataset.show); //calls fetch function with ID
       myJson.then(function(comment){
-        comment.data.relationships.comments.data.forEach(function(comment){
-          let ccc = fetchComment(comment.id, show.dataset.show);
-          ccc.then(function(c){
-              listComments(c);
-          })
-
+        comment.included.forEach(function(comment){
+          listComments(comment.attributes, comment.id);
         })
       });
 }
 
-function listComments(comment){
-
+function listComments(comment, showId){
   const show = document.querySelector("#get_comments") // used to get the show ID
-  //comment.then(function(comment){
-//debugger;
     let li = document.createElement('li');
     let a = document.createElement('a');
-    let text = document.createTextNode(`${comment.data.attributes.title}`);
+    let text = document.createTextNode(`${comment.title}`);
     a.appendChild(text);
-    a.setAttribute('href',`/shows/${show.dataset.show}/comments/${comment.data.id}`);
+    a.setAttribute('href',`/shows/${show.dataset.show}/comments/${showId}`);
     li.appendChild(a);
     document.getElementById('comments').appendChild(li);
-//})
 }
 
 //---------------------- requirement 2 ----------------------
