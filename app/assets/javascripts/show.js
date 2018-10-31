@@ -1,20 +1,33 @@
 function showSearch(){
   event.preventDefault();
-  const genre = document.querySelector('input[name = "type"]:checked').value
-  alert(genre);
+  const type = document.querySelector('input[name = "type"]:checked').value;
+  const choice = document.getElementById("genres");
+  const genre = choice.options[choice.selectedIndex].value;
+
   const shows = fetchShows();
+
   shows.then(function(data){
-    alert(data);
+    debugger;
+    let f = data.data.filter(g => g.attributes.genre === genre);
+    let shows = f.filter(t => t.attributes["show-type"] === type);
+    shows.forEach(function(show){
+      let li = document.createElement('li');
+      let a = document.createElement('a');
+      let text = document.createTextNode(`${show.attributes["show-title"]}`);
+      a.appendChild(text);
+      a.setAttribute('href',`/shows/${show.id}`);
+      li.appendChild(a);
+      document.getElementById("searchResult").appendChild(li);
+    })
   })
-  alert("search");
 }
 
-function genre(genre){
-  if (genre = formGenre){
-    return true;
-  }
-  return false;
-}
+//function genre(genre, showGenre){
+  //if (genre = showGenre){
+    //return true;
+  //}
+  //return false;
+//}
 //---------------------- requirement 5 ----------------------
 // Show Object constructor
 function Show(showData){
