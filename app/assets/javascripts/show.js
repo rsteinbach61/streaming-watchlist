@@ -137,7 +137,7 @@ function sortShows(event){
      showList.forEach(function(show){           //display shows in the DOM
        let li = document.createElement('li');
        let a = document.createElement('a');
-       let text = document.createTextNode(`${show.attributes["show-title"]}`);
+       let text = document.createTextNode(`Show: ${show.attributes["show-title"]},  Genre: ${show.attributes["genre"]}, Type: ${show.attributes["show-type"]}`);
        a.appendChild(text);
        a.setAttribute('href',`/shows/${show.id}`);
        li.appendChild(a);
