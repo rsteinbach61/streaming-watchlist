@@ -1,16 +1,17 @@
 function showSearch(){
   event.preventDefault();
-  const type = document.querySelector('input[name = "type"]:checked').value;
+  document.getElementById("searchResult").innerHTML = "";
+  const type = document.querySelector('input[name = "type"]:checked').value; //get the type and genre from the form
   const choice = document.getElementById("genres");
   const genre = choice.options[choice.selectedIndex].value;
 
   const shows = fetchShows();
 
-  shows.then(function(data){
-    debugger;
-    let f = data.data.filter(g => g.attributes.genre === genre);
-    let shows = f.filter(t => t.attributes["show-type"] === type);
-    shows.forEach(function(show){
+  shows.then(function(programs){          //filter the results of the fetch by genre and type
+    let genreFilter = programs.data.filter(g => g.attributes.genre === genre);
+    let shows = genreFilter.filter(t => t.attributes["show-type"] === type);
+
+    shows.forEach(function(show){           //display shows in the DOM
       let li = document.createElement('li');
       let a = document.createElement('a');
       let text = document.createTextNode(`${show.attributes["show-title"]}`);

@@ -24,7 +24,6 @@
       <div class="flex-container">
         <div class="background">
           <div class="content">
-            <button onclick="test()">test</button>
             <% flash.each do |name, msg| -%>
             <%= content_tag :div, msg, class: name %>
             <% end -%>
