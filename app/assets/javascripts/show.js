@@ -114,3 +114,36 @@ function postShow(obj){
               return showData;
             })
 }
+let watchlistId;
+
+function sortShows(event){
+  watchlistId = event.target.dataset.list;
+  const list = fetchShows();
+
+  list.then(function(shows){
+    const showList = shows.data.filter(s => s.attributes["watchlist-id"] === parseInt(watchlistId))
+    showList.sort(function(a,b){
+      let showA = a.attributes["show-title"];
+      let showB = b.attributes["show-title"];
+      if (showA < showB) {
+        return -1;
+      }
+      if (showA > showB) {
+        return 1;
+      }
+      return 0;
+     })
+     debugger;
+     showList.forEach(function(show){           //display shows in the DOM
+       let li = document.createElement('li');
+       let a = document.createElement('a');
+       let text = document.createTextNode(`${show.attributes["show-title"]}`);
+       a.appendChild(text);
+       a.setAttribute('href',`/shows/${show.id}`);
+       li.appendChild(a);
+       document.getElementById("watchlistSort").appendChild(li);
+     })
+
+  })
+
+}

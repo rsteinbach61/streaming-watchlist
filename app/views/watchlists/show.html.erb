@@ -16,3 +16,6 @@
 </table>
 
 <p><%= link_to 'Add New Show', new_show_path %></p>
+<button data-list="<%=@watchlist.id%>" onclick="sortShows(event)">Sort</button>
+
+<div><ul id="watchlistSort"></ul></div>

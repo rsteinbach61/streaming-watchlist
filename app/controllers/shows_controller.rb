@@ -55,7 +55,7 @@ class ShowsController < ApplicationController
     end
     respond_to do |format|
       format.html {render "/shows/show"}
-      format.json {render json: @show, include: 'comments'}
+      format.json {render json: @show}
     end
   end
 
