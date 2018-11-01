@@ -55,7 +55,7 @@ class ShowsController < ApplicationController
     end
     respond_to do |format|
       format.html {render "/shows/show"}
-      format.json {render json: @show}
+      format.json {render json: @show, include: 'comments'}
     end
   end
 
@@ -63,7 +63,7 @@ class ShowsController < ApplicationController
     @shows = current_user.shows
     respond_to do |format|
       format.html {render "/shows"}
-      format.json {render json: @shows}
+      format.json {render json: @shows, include: 'comments'}
     end
   end
 
