@@ -5,9 +5,15 @@ function getComments(){
   const show = document.querySelector("#get_comments") // used to get the show ID
     const myJson = fetchShow(show.dataset.show); //calls fetch function with ID
       myJson.then(function(comment){
-        comment.included.forEach(function(comment){
-          listComments(comment.attributes, comment.id);
-        })
+  
+        if(comment.included){
+          comment.included.forEach(function(comment){
+            listComments(comment.attributes, comment.id);
+          })
+        }else{
+          alert("There are no comments.")
+        }
+
       });
 }
 
