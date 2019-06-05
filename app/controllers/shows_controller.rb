@@ -1,4 +1,4 @@
-require 'pry'
+
 class ShowsController < ApplicationController
   skip_before_action :require_login
   before_action :set_show#, only: [:show, :edit, :update, :destroy]
